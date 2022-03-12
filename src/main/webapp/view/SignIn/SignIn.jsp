@@ -39,6 +39,26 @@
                     },
                 });
             });
+            $("input[id='send']").click(function (){
+                var tel = $("input[name='tel']").val();
+                alert(tel);
+                $.ajax({
+                    type:"GET", // 提交数据类型
+                    url:"${pageContext.request.contextPath}/SendSmsServlet", // 提交到哪个服务器
+                    data:"username="+tel, // 提交的数据
+                    dataType:"text", // 提交的数据类型
+                    success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
+                        if (d=="success"){
+                            alert("请注意查收！");
+                        }else{
+                            alert("短信发送失败！")
+                        }
+                    },
+                    error:function (d,errorThrown){
+                        $("#div").text(d.responseText+" "+d.status+"  "+d.readyState+" "+errorThrown);
+                    },
+                });
+            });
         });
         function goSignUp(){
             window.location.href="../view/SignUp/Sign_up.jsp";
@@ -97,7 +117,7 @@
         </div><br>
         <div class="input-group input-group-lg">
             <input type="text" class="form-control" value="" name="code" placeholder="code" aria-describedby="sizing-addon1" style="width: 280px;margin-right: 20px">
-            <input type="button" name="code" value="获取验证码" class="btn btn-default" style="width: 150px;height: 46px">
+            <input type="button" id="send" value="获取验证码" class="btn btn-default" style="width: 150px;height: 46px">
         </div><br>
         <div>
             <input type="radio" name="role" value="student"> student
