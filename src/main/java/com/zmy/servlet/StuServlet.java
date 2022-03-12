@@ -27,11 +27,10 @@ public class StuServlet  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("dopost.....");
-        String username = req.getParameter("username");
-        int sid = Integer.parseInt(username);
+        String sids = req.getParameter("sid");
+        int sid = Integer.parseInt(sids);
         String password = req.getParameter("password");
         String role = req.getParameter("role");
-        System.out.println(username);
         // 根据username 和 password 查询学生
         StuDaoImpl stuDao = new StuDaoImpl();
         Student student = stuDao.findStudentBySignUP(sid, password,role);
@@ -39,7 +38,7 @@ public class StuServlet  extends HttpServlet {
         if (student!=null){ // 登录成功，跳转到主页面
             resp.sendRedirect("../../view/student/stu_home.jsp");
         }else{ // 登录失败，跳转到登录页面，并且保存账号
-            Cookie cookie = new Cookie("username",username);
+            Cookie cookie = new Cookie("sid",sids);
             resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
         }
     }

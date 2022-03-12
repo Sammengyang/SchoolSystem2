@@ -26,41 +26,21 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("注册dopost。。。。");
-        // 先检查该账号是否存在学校系统中
-        Student student = new Student(
-                Integer.parseInt(req.getParameter("sid")),
-                req.getParameter("name"),
-                req.getParameter("pwd"),
-                req.getParameter("tel"),
-                req.getParameter("role")
-        );
-        System.out.println("=========== jdbc 从数据库中查询数据书否存在 ============");
-        // 根据身份确认查询得表，根据sid查询是否存在
-        SignInDaoImpl signInDao = new SignInDaoImpl();
-        Student stu = signInDao.findByRoleAndid(student.getSid());
-        if (student!=null){
-            if (student.getSid()!=null&&student.getPwd()==null){
-                // 设置返回值类型
-                resp.setContentType("text/html;charset=utf-8");
-                PrintWriter out = resp.getWriter();
-                out.write("success");
-                out.flush();
-                out.close();
-            }
-        }else {
-            // 该学生不在学校系统
-            resp.setContentType("text/html;charset=utf-8");
-            PrintWriter out = resp.getWriter();
-            out.write("false");
-            out.flush();
-            out.close();
-        }
-        if (stu!=null){
-            if (student.getSid()!=null&&student.getPwd()==null){// 判断该学生是否注册过
-                signInDao.AddStudent(student);
-                resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
-            }
+        // 获取到注册页面的数据，并存入student对象中
+        Student stu;
+        String id = req.getParameter("sid");
+        String sname = req.getParameter("names");
+        String password = req.getParameter("password");
+        String tel = req.getParameter("tel");
+        String role = req.getParameter("role");
+        if(id.length()!=0&&sname!=null&&password.length()!=0&&tel.length()!=0&&role!=null){
+            Integer sid = Integer.parseInt(id);
+            stu = new Student(sid,sname,password, tel,role);
+            SignInDaoImpl signInDao = new SignInDaoImpl();
+            signInDao.AddStudent(stu);
+            resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
+        } else{
+            resp.sendRedirect("../../view/SignIn/SignIn.jsp");
         }
     }
 }

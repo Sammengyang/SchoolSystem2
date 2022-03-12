@@ -55,13 +55,14 @@ public class SignInDaoImpl implements SignInDao {
         Connection con = null;
         PreparedStatement ps = null;
         try {
-            con = DBUtil.getCon();
-            String sql = "insert into student (sid,sname,pwd,tel)values(?,?,?,?)";
+            con = DBUtil.getCon();//insert into student (sid,sname,pwd,tel)values(?,?,?,?)
+            String sql = "update student set sname=?,pwd=?,tel=?,role=? where sid=?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,student.getSid());
-            ps.setObject(2,student.getSname());
-            ps.setObject(3,student.getPwd());
-            ps.setObject(4,student.getTel());
+            ps.setObject(1,student.getSname());
+            ps.setObject(2,student.getPwd());
+            ps.setObject(3,student.getTel());
+            ps.setObject(4,student.getRole());
+            ps.setObject(5,student.getSid());
             // 关闭资源
             ps.executeUpdate();
         } catch (SQLException e) {

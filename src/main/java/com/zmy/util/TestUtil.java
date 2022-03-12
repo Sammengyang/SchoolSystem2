@@ -34,4 +34,9 @@ public class TestUtil {
         SignInDaoImpl signInDao = new SignInDaoImpl();
         System.out.println(signInDao.findByRoleAndid(1003));
     }
+    @Test
+    public void tes(){
+        String s="";
+        System.out.println(s.length());
+    }
 }

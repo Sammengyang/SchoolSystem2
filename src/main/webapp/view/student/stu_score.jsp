@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.zmy.servlet.stu.ScoreServlet" %><%--
   Created by IntelliJ IDEA.
   User: Sam
   Date: 2022/3/10
@@ -21,6 +21,19 @@
 
 </head>
 <body>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>考号</td>
+                <td>学号</td>
+                <td>班级</td>
+                <td>分数</td>
+                <td>考试时间</td>
+            </tr>
+        </thead>
+        <tbody>
 
+        </tbody>
+    </table>
 </body>
 </html>

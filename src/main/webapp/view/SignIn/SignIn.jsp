@@ -20,19 +20,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(function (){
-            $("input[name='username']").blur(function (){
-                var uname = $("input[name='username']").val();
+            $("input[name='sid']").blur(function (){
+                var sid = $("input[name='sid']").val();
                 $.ajax({
                     type:"GET", // 提交数据类型
-                    url:"SignInServlet", // 提交到哪个服务器
-                    data:"username"+uname, // 提交的数据
+                    url:"${pageContext.request.contextPath}/AccountServlet", // 提交到哪个服务器
+                    data:"username="+sid, // 提交的数据
                     dataType:"text", // 提交的数据类型
                     success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
-                        alert("d"+d);
                         if (d=="success"){
-                            $("div>span").html("存在1111");
+                            $("span[id='span-sid']").html("账号已被使用");
                         }else{
-                            $("div>span").html("错误");
+                            $("span[id='span-sid']").html("");
                         }
                     },
                     error:function (d,errorThrown){
@@ -47,13 +46,13 @@
     </script>
     <style>
         #login{
-            margin-top: 110px;
+            margin-top: 300px;
             margin-left: 700px;
             width: 450px;
         }
         #exist{
             position: absolute;
-            top: 110px;
+            top: 310px;
             left: 1180px;
             font-size: 20px;
             color: red;
@@ -75,37 +74,41 @@
         session.setAttribute("role",role);
     %>
 <div id="login" class="center-block">
-    <form action="SignInServlet" method="post">
+    <form action="/SignInServlet" method="post">
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="sid" >账号</span>
             <input type="text" class="form-control" value="" name="sid" placeholder="sid" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="username" >姓名</span>
-            <input type="text" class="form-control" value="" name="username" placeholder="Name" aria-describedby="sizing-addon1">
+            <span class="input-group-addon" id="sname" >姓名</span>
+            <input type="text" class="form-control" value="" name="sname" placeholder="Name" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="password" >密码</span>
-            <input type="password" class="form-control" name="password" placeholder="password" aria-describedby="sizing-addon1">
+            <input type="password" class="form-control" value="" name="password" placeholder="password" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="rpassword" >确认密码</span>
-            <input type="password" class="form-control" name="password" placeholder="password" aria-describedby="sizing-addon1">
+            <input type="password" class="form-control" value="" name="rpassword" placeholder="password" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="tel" >电话</span>
-            <input type="text" class="form-control" name="tel" placeholder="tel" aria-describedby="sizing-addon1">
+            <input type="text" class="form-control" value="" name="tel" placeholder="tel" aria-describedby="sizing-addon1">
+        </div><br>
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" value="" name="code" placeholder="code" aria-describedby="sizing-addon1" style="width: 280px;margin-right: 20px">
+            <input type="button" name="code" value="获取验证码" class="btn btn-default" style="width: 150px;height: 46px">
         </div><br>
         <div>
             <input type="radio" name="role" value="student"> student
             <input type="radio" name="role" value="teacher"> teacher
         </div>
-        <button type="submit" class="btn btn-default" style="width: 200px;height: 40px;margin-left: 25px">注册</button>
-        <button type="button" class="btn btn-default" style="width: 200px;height: 40px" onclick="">登录</button>
+        <button type="submit" class="btn btn-default" style="width: 210px;height: 40px;margin-right: 25px">注册</button>
+        <button type="button" class="btn btn-default" style="width: 210px;height: 40px" onclick="">登录</button>
     </form>
 </div>
 <div id="exist">
-    <span>存在</span>
+    <span id="span-sid"></span>
 </div>
 </body>
 </html>

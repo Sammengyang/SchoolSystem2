@@ -50,8 +50,8 @@
 <div id="register" class="center-block">
     <form action="StuServlet" method="post">
         <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="username" >账号</span>
-            <input type="text" class="form-control" value="<%=username%>" name="username" placeholder="Username" aria-describedby="sizing-addon1">
+            <span class="input-group-addon" id="sid" >账号</span>
+            <input type="text" class="form-control" value="<%=username%>" name="sid" placeholder="Username" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="password" >密码</span>
@@ -65,7 +65,7 @@
             <button type="submit" class="btn btn-default" style="width: 450px;height: 40px">登录</button>
         </div><br>
         <div style="float: right">
-            <a href="/view/SignIn/StuSignIn.jsp">注册</a>
+            <a href="/view/SignIn/SignIn.jsp">注册</a>
         </div>
     </form>
 
