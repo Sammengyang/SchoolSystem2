@@ -58,7 +58,6 @@
             <td>手机号:</td>
             <td>${student.tel}</td>
         </tr>
-
     </table>
 </body>
 </html>

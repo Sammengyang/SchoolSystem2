@@ -1,4 +1,7 @@
-<%@ page import="com.zmy.servlet.stu.ScoreServlet" %><%--
+<%@ page import="com.zmy.servlet.stu.ScoreServlet" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.zmy.pojotrait.Stu_score" %><%--
   Created by IntelliJ IDEA.
   User: Sam
   Date: 2022/3/10
@@ -20,6 +23,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 </head>
+    <%
+        List list = (List) session.getAttribute("list");
+    %>
 <body>
     <table class="table table-hover">
         <thead>
@@ -32,7 +38,23 @@
             </tr>
         </thead>
         <tbody>
-
+        <%
+            if (list.size()!=0&&list!=null){
+                Iterator iterator = list.iterator();
+                while (iterator.hasNext()){
+                    Stu_score stuScore = (Stu_score) iterator.next();
+        %>
+                <tr>
+                    <td><%=stuScore.getId()%></td>
+                    <td><%=stuScore.getSid()%></td>
+                    <td><%=stuScore.getCid()%></td>
+                    <td><%=stuScore.getScore()%></td>
+                    <td><%=stuScore.getExam_time()%></td>
+                </tr>
+        <%
+                }
+            }
+        %>
         </tbody>
     </table>
 </body>

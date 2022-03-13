@@ -28,8 +28,8 @@ public class SendSmsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 发送短信
-//        String code = SendSmsUtil.SendSms();
-        String code = "123456";
+        String code = SendSmsUtil.SendSms();
+//        String code = "123456";
         // 获取到手机号
         String tel = req.getParameter("username");
         if (code!=null&&tel.length()==11){

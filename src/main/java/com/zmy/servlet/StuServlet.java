@@ -21,12 +21,10 @@ import java.io.IOException;
 public class StuServlet  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("doget....");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("dopost.....");
         String sids = req.getParameter("sid");
         int sid = Integer.parseInt(sids);
         String password = req.getParameter("password");
@@ -36,6 +34,8 @@ public class StuServlet  extends HttpServlet {
         Student student = stuDao.findStudentBySignUP(sid, password,role);
         req.getSession().setAttribute("student",student);
         if (student!=null){ // 登录成功，跳转到主页面
+            // 将登录人的sid存入cookie
+            Cookie cookie = new Cookie("sid",sids);
             resp.sendRedirect("../../view/student/stu_home.jsp");
         }else{ // 登录失败，跳转到登录页面，并且保存账号
             Cookie cookie = new Cookie("sid",sids);

@@ -6,6 +6,10 @@
     <title>学生教务系统</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <%
+        Cookie[] cookies = request.getCookies();
+        String sid = String.valueOf(cookies[0]);
+    %>
     <script type="text/javascript">
         $(document).ready(function(){
             $("#nav1").click(function (e) {
@@ -15,6 +19,7 @@
             $("#nav2").click(function (e) {
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
+                sendMsg();
             });
             $("#nav3").click(function (e) {
                 e.preventDefault();
@@ -53,6 +58,14 @@
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
+            function sendMsg(){
+                $.ajax({
+                    type:"GET", // 提交数据类型
+                    url:"${pageContext.request.contextPath}/ScoreServlet", // 提交到哪个服务器
+                    data:"username="+sid, // 提交的数据
+                    dataType:"text", // 提交的数据类型
+                });
+            }
         });
     </script>
 </head>
@@ -88,8 +101,8 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">Your Profile</a></dd>
-                    <dd><a id="stu_set" href="\view\student\stu_setting.jsp">Settings</a></dd>
-                    <dd><a href="">Sign out</a></dd>
+                    <dd><a id="stu_set" href=".././student/stu_setting.jsp">Settings</a></dd>
+                    <dd><a href=".././SignUp/Sign_up.jsp">Sign out</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>

@@ -1,10 +1,14 @@
 package com.zmy.util;
 
 
+import com.zmy.dao.impl.ScoreDaoImpl;
 import com.zmy.dao.impl.SignInDaoImpl;
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.pojo.Student;
+import com.zmy.pojotrait.Stu_score;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * @author Sam  Email:superdouble@yeah.net
@@ -38,5 +42,11 @@ public class TestUtil {
     public void tes(){
         String s="";
         System.out.println(s.length());
+    }
+    @Test
+    public void testGetscoreBysid(){
+        ScoreDaoImpl scoreDao = new ScoreDaoImpl();
+        List<Stu_score> scoreBysid = scoreDao.getScoreBysid(1001);
+        System.out.println(scoreBysid);
     }
 }
