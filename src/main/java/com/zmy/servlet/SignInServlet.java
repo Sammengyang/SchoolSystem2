@@ -29,17 +29,29 @@ public class SignInServlet extends HttpServlet {
         // 获取到注册页面的数据，并存入student对象中
         Student stu;
         String id = req.getParameter("sid");
-        String sname = req.getParameter("names");
+        String sname = req.getParameter("sname");
         String password = req.getParameter("password");
         String tel = req.getParameter("tel");
         String role = req.getParameter("role");
-        if(id.length()!=0&&sname!=null&&password.length()!=0&&tel.length()!=0&&role!=null){
-            Integer sid = Integer.parseInt(id);
-            stu = new Student(sid,sname,password, tel,role);
-            SignInDaoImpl signInDao = new SignInDaoImpl();
-            signInDao.AddStudent(stu);
-            resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
-        } else{
+        String code = req.getParameter("code");
+        String codes = (String) req.getSession().getAttribute("code");
+        String tels = (String) req.getSession().getAttribute("tel");
+        System.out.println(codes);
+        System.out.println(tels);
+        if (tels.equals(tel)){ // 发送短信前和发送短信后手机号一致
+            if (codes.equals(code)&&code.length()==6){  // 填写的验证是6位，并且和发送验证码一样
+                if(id.length()!=0&&sname!=null&&password.length()!=0&&tel.length()!=0&&role!=null){
+                    Integer sid = Integer.parseInt(id);
+                    stu = new Student(sid,sname,password, tel,role);
+                    SignInDaoImpl signInDao = new SignInDaoImpl();
+                    signInDao.AddStudent(stu);
+                    System.out.println("++++跳转登录页面");
+                    resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
+                } else{
+                    resp.sendRedirect("../../view/SignIn/SignIn.jsp");
+                }
+            }
+        }else{ // 发送短信前和发送短信后手机号不一致
             resp.sendRedirect("../../view/SignIn/SignIn.jsp");
         }
     }
