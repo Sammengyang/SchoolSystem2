@@ -16,4 +16,12 @@ public interface ScoreDao {
      * @return 返回成绩集合
      */
     List<Stu_score> getScoreBysid(Integer sid);
+
+    /**
+     * 根据id查询对应学生成绩，并根据页数进行分页
+     * @param sid
+     * @param num
+     * @return
+     */
+    List<Stu_score> getPagingScore(Integer sid,Integer num);
 }

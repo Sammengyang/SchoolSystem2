@@ -55,4 +55,40 @@ public class ScoreDaoImpl implements ScoreDao {
         }
         return list;
     }
+
+    /**
+     * 根据id查询对应学生成绩，并根据页数进行分页
+     * @param sid
+     * @param num
+     * @return
+     */
+    @Override
+    public List<Stu_score> getPagingScore(Integer sid, Integer num) {
+        List<Stu_score> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from scores where sid=? limit "+2+",2";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, sid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Stu_score stuScore = new Stu_score(
+                        rs.getInt("id"),
+                        rs.getInt("sid"),
+                        rs.getString("cid"),
+                        rs.getString("score"),
+                        rs.getDate("exam_time")
+                );
+                list.add(stuScore);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return null;
+    }
 }

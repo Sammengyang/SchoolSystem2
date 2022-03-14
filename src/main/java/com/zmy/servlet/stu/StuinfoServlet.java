@@ -5,7 +5,6 @@ import com.zmy.pojo.Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +15,8 @@ import java.io.IOException;
  * @Description
  * @create 2022-03-14 15:56
  */
-@WebServlet("/StuinforServlet")
-public class StuinforServlet extends HttpServlet {
+@WebServlet("/StuinfoServlet")
+public class StuinfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req,resp);
@@ -25,7 +24,7 @@ public class StuinforServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = (Integer) req.getSession().getAttribute("id");
+        Integer id = Integer.parseInt((String) req.getSession().getAttribute("id")) ;
         if (id == null) {
             resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
         } else {
@@ -36,7 +35,7 @@ public class StuinforServlet extends HttpServlet {
                 req.getSession().setAttribute("msg","没查到该学生信息");
             } else {
                 req.getSession().setAttribute("stuinfo",stuInfo);
-                resp.sendRedirect("../../view/student/stu_infor.jsp");
+                resp.sendRedirect("view/student/stu_info.jsp");
             }
         }
     }

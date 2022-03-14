@@ -1,6 +1,7 @@
 package com.zmy.dao.impl;
 
 import com.zmy.dao.TeacherDao;
+import com.zmy.pojo.Student;
 import com.zmy.pojo.Teacher;
 import com.zmy.util.DBUtil;
 
@@ -24,28 +25,35 @@ public class TeacherDaoImpl implements TeacherDao {
      */
     @Override
     public Teacher GetTeacherBytid(Integer tid, String password, String role) {
-        Teacher teacher = null;
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String sql = "select * from "+role+" where sid=? and pwd=?";
         try {
             con = DBUtil.getCon();
-            String sql = "select * from "+role+"where tid=? and pwd=?";
+            // 预编译sql语句
             ps = con.prepareStatement(sql);
+            // 填充占位符
             ps.setObject(1,tid);
             ps.setObject(2,password);
+            // 执行sql语句
             rs = ps.executeQuery();
             if (rs.next()){
-                teacher = new Teacher();
-                teacher.setTid(rs.getInt("tid"));
-                teacher.setPwd(rs.getString("pwd"));
+                Teacher teacher = new Teacher(
+                        rs.getInt("tid"),
+                        rs.getString("tname"),
+                        rs.getString("pwd"),
+                        rs.getString("role"),
+                        rs.getDate("inschool_time"),
+                        rs.getString("tel")
+                );
                 return teacher;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        }finally {
             DBUtil.closeAll(con,ps,rs);
         }
-        return teacher;
+        return null;
     }
 }

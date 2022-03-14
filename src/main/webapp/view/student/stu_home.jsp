@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -60,29 +61,43 @@
         });
     </script>
 </head>
+<%
+
+%>
 <body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo layui-hide-xs layui-bg-black"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbkimg.cdn.bcebos.com%2Fpic%2Ff31fbe096b63f6246b6028138d09fcf81a4c510f05c4&refer=http%3A%2F%2Fbkimg.cdn.bcebos.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649496736&t=d69e33270557ea73bec3daa7662adc2d" width="100%" height="100%"></div>
         <!-- 头部区域（可配合layui 已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
-            <!-- 移动端显示 -->
-            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
-                <i class="layui-icon layui-icon-spread-left"></i>
-            </li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav1" href="/StuinforServlet">个人信息</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav2" href="/ScoreServlet">历史成绩</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav3" href="stu_course.jsp">课表</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav4" href="stu_leave.jsp">请假申请</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="stu_message.jsp">消息查看</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="stu_repairs.jsp">故障报修</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">作业</a>
-                <dl class="layui-nav-child">
-                    <dd><a id="stu_homework" href="stu_homework.jsp">查看作业</a></dd>
-                    <dd><a id="stu_post_homework" href="stu_post_homework.jsp">提交作业</a></dd>
-                </dl>
-            </li>
+            <c:if test="${role =='student'}">
+                <li class="layui-nav-item layui-hide-xs"><a id="nav1" href="/StuinfoServlet">个人信息</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav2" href="/ScoreServlet">历史成绩</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav3" href="stu_course.jsp">课表</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav4" href="stu_leave.jsp">请假申请</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="stu_message.jsp">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="stu_repairs.jsp">故障报修</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">作业</a>
+                    <dl class="layui-nav-child">
+                        <dd><a id="stu_homework" href="stu_homework.jsp">查看作业</a></dd>
+                        <dd><a id="stu_post_homework" href="stu_post_homework.jsp">提交作业</a></dd>
+                    </dl>
+                </li>
+            </c:if>
+            <c:if test="${role =='teacher'}">
+                <li class="layui-nav-item layui-hide-xs"><a id="tinfo" href="">个人信息.</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a href="javascript:;">请假审核</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="getScore" href="">发起调课</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="getCourse" href="">查看全班学生学分</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">作业</a>
+                    <dl class="layui-nav-child">
+                        <dd><a id="CheckHomework" href="stu_homework.jsp">发布作业</a></dd>
+                        <dd><a id="AssignHomework" href="stu_post_homework.jsp">审批作业</a></dd>
+                    </dl>
+                </li>
+            </c:if>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
@@ -92,8 +107,8 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">Your Profile</a></dd>
-                    <dd><a id="stu_set" href=".././student/stu_setting.jsp">Settings</a></dd>
-                    <dd><a href="/SignOutServlet">Sign out</a></dd>
+                    <dd><a href="">Settings</a></dd>
+                    <dd><a href="/SignOutServlet" id="signOut">Sign out</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
@@ -108,7 +123,7 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item ">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">量化评教</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">量化评教</a></dd>
@@ -133,9 +148,8 @@
     </div>
 
     <div class="layui-body">
-        <!-- 内容主体区域 内容主体区域。记得修改 layui.css 和 js 的路径-->
-        <div style="padding: 0px;" id="divbody">
-            <iframe id="f1" src="stu_infor.jsp" width="100%" height="600px"></iframe>
+        <div style="padding: 0px;" id="divbody">内容主体区域 内容主体区域。记得修改 layui.css 和 js 的路径
+            <iframe id="f1" src="" width="100%" height="600px"></iframe>
         </div>
     </div>
 

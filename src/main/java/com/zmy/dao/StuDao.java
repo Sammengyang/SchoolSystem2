@@ -34,7 +34,7 @@ public interface StuDao {
     Student getStuByid(Integer id);
 
     /**
-     * 根据学生的id查询学生的成绩
+     *  根据id或去对应人的历史成绩
      *
      * @param id
      * @return

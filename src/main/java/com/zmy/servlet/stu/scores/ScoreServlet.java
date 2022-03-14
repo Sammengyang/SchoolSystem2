@@ -1,4 +1,4 @@
-package com.zmy.servlet.stu;
+package com.zmy.servlet.stu.scores;
 
 import com.zmy.dao.impl.ScoreDaoImpl;
 import com.zmy.dao.impl.StuDaoImpl;
@@ -27,7 +27,7 @@ public class ScoreServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = (Integer) req.getSession().getAttribute("id");
+        Integer id = Integer.parseInt((String) req.getSession().getAttribute("id")) ;
         if (id == null) {
             resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
         } else {

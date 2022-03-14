@@ -1,4 +1,5 @@
-<%@ page import="com.zmy.servlet.stu.ScoreServlet" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.zmy.servlet.stu.scores.ScoreServlet" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="com.zmy.pojotrait.Stu_score" %>
@@ -13,7 +14,8 @@
 <html>
 <head>
     <title>历史成绩</title>
-    <script src="js/jquery-3.6.0.js" type="text/javascript"></script>
+    <script src="/js/jquery-3.6.0.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css">
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
@@ -28,43 +30,50 @@
         List<Scores> scores = (List) session.getAttribute("scores");
     %>
 <body>
+<div>
     <table class="table table-hover">
         <thead>
-            <tr>
-                <td>考号</td>
-                <td>学号</td>
-                <td>班级</td>
-                <td>分数</td>
-                <td>考试时间</td>
-            </tr>
+        <tr>
+            <td>考号</td>
+            <td>学号</td>
+            <td>班级</td>
+            <td>分数</td>
+            <td>考试时间</td>
+        </tr>
         </thead>
         <tbody>
-<%--        <c:forEach items="${list}" var="el">--%>
-<%--            <tr>--%>
-<%--                <td>${el.getId()}</td>--%>
-<%--                <td>${el.getSid()}</td>--%>
-<%--                <td>${el.getCid()}</td>--%>
-<%--                <td>${el.getScore()}</td>--%>
-<%--                <td>${el.getExam_time()}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-        <%
-            if (scores.size()>0){
-                for (int i = 0; i < scores.size(); i++) {
-                    Scores score = scores.get(i);
-        %>
+        <c:forEach items="${scores}" var="el">
             <tr>
-                <td><%=score.getId()%></td>
-                <td><%=score.getSid()%></td>
-                <td><%=score.getCid()%></td>
-                <td><%=score.getScore()%></td>
-                <td><%=score.getExam_time()%></td>
+                <td>${el.id}</td>
+                <td>${el.sid}</td>
+                <td>${el.cid}</td>
+                <td>${el.score}</td>
+                <td>${el.exam_time}</td>
             </tr>
-        <%
-                }
-            }
-        %>
+        </c:forEach>
         </tbody>
     </table>
+</div>
+<div class="paging">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li><a href="/PagingServlet">1</a></li>
+            <li><a href="/PagingServlet">2</a></li>
+            <li><a href="/PagingServlet">3</a></li>
+            <li><a href="/PagingServlet">4</a></li>
+            <li><a href="/PagingServlet">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
 </body>
 </html>

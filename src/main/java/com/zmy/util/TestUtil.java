@@ -53,13 +53,23 @@ public class TestUtil {
     @Test
     public void testSignUp(){
         SignUpDaoImpl signUpDao = new SignUpDaoImpl();
-        boolean teacher = signUpDao.findBySignUP(20011, "1", "teacher");
-        System.out.println(teacher);
+//        boolean teacher = signUpDao.findBySignUP(20011, "1", "teacher");
+//        System.out.println(teacher);
     }
     @Test
     public void testgetSTUbyID(){
         StuDaoImpl stuDao = new StuDaoImpl();
         Student stuByid = stuDao.getStuByid(1001);
         System.out.println(stuByid);
+    }
+    // 测试分页
+    @Test
+    public void testP(){
+        ScoreDaoImpl scoreDao = new ScoreDaoImpl();
+        List<Stu_score> pagingScore = scoreDao.getPagingScore(1001, 2);
+        System.out.println(pagingScore);
+        System.out.println(pagingScore.get(0).toString());
+        System.out.println(pagingScore.get(1).toString());
+
     }
 }

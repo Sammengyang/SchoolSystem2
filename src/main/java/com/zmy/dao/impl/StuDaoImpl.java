@@ -65,7 +65,6 @@ public class StuDaoImpl implements StuDao {
         }
         return null;
     }
-
     /**
      *
      * @param sid
@@ -121,6 +120,12 @@ public class StuDaoImpl implements StuDao {
         return null;
     }
 
+    /**
+     *  根据id或去对应人的历史成绩
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<Scores> getScoreBysid(Integer id) {
         List<Scores> list= new ArrayList<>();

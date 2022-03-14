@@ -16,4 +16,6 @@ public interface SignDao {
      * @return  如果查询到返回student对象，否则返回null
      */
     Student findStudentBySignUP(Integer sid, String pwd, String role);
+
+
 }

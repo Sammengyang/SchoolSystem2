@@ -30,7 +30,7 @@ public class StuServlet  extends HttpServlet {
         int sid = Integer.parseInt(sids);
         String password = req.getParameter("password");
         String role = req.getParameter("role");
-        // 根据username 和 password 查询学生
+        // 根据role 和 id 和 password 查询用户信息
         StuDaoImpl stuDao = new StuDaoImpl();
         Student student = stuDao.findStudentBySignUP(sid, password,role);
         req.getSession().setAttribute("student",student);

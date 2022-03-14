@@ -78,7 +78,7 @@
 <%--    System.out.println(username);--%>
 <%--%>--%>
 <div id="register" class="center-block">
-    <form action="/StuServlet" method="post">
+    <form action="/SignUpServlet" method="post">
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="sid">账号</span>
             <input type="text" class="form-control" value="" name="sid" placeholder="Username"
