@@ -1,4 +1,4 @@
-package com.zmy.servlet;
+package com.zmy.servlet.stu;
 
 import com.zmy.dao.impl.SignInDaoImpl;
 import com.zmy.pojo.Student;
@@ -45,7 +45,6 @@ public class SignInServlet extends HttpServlet {
                     stu = new Student(sid,sname,password, tel,role);
                     SignInDaoImpl signInDao = new SignInDaoImpl();
                     signInDao.AddStudent(stu);
-                    System.out.println("++++跳转登录页面");
                     resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
                 } else{
                     resp.sendRedirect("../../view/SignIn/SignIn.jsp");

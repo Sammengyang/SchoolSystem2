@@ -19,7 +19,6 @@
             $("#nav2").click(function (e) {
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
-                sendMsg();
             });
             $("#nav3").click(function (e) {
                 e.preventDefault();
@@ -58,14 +57,6 @@
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
-            function sendMsg(){
-                $.ajax({
-                    type:"GET", // 提交数据类型
-                    url:"${pageContext.request.contextPath}/ScoreServlet", // 提交到哪个服务器
-                    data:"username="+sid, // 提交的数据
-                    dataType:"text", // 提交的数据类型
-                });
-            }
         });
     </script>
 </head>
@@ -79,8 +70,8 @@
             <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
                 <i class="layui-icon layui-icon-spread-left"></i>
             </li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav1" href="stu_infor.jsp">个人信息</a></li>
-            <li class="layui-nav-item layui-hide-xs"><a id="nav2" href="stu_score.jsp">历史成绩</a></li><!-- stu_score.jsp -->
+            <li class="layui-nav-item layui-hide-xs"><a id="nav1" href="/StuinforServlet">个人信息</a></li>
+            <li class="layui-nav-item layui-hide-xs"><a id="nav2" href="/ScoreServlet">历史成绩</a></li>
             <li class="layui-nav-item layui-hide-xs"><a id="nav3" href="stu_course.jsp">课表</a></li>
             <li class="layui-nav-item layui-hide-xs"><a id="nav4" href="stu_leave.jsp">请假申请</a></li>
             <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="stu_message.jsp">消息查看</a></li>
@@ -102,7 +93,7 @@
                 <dl class="layui-nav-child">
                     <dd><a href="">Your Profile</a></dd>
                     <dd><a id="stu_set" href=".././student/stu_setting.jsp">Settings</a></dd>
-                    <dd><a href=".././SignUp/Sign_up.jsp">Sign out</a></dd>
+                    <dd><a href="/SignOutServlet">Sign out</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>

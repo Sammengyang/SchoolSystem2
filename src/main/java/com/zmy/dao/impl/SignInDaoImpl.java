@@ -2,6 +2,7 @@ package com.zmy.dao.impl;
 
 import com.zmy.dao.SignInDao;
 import com.zmy.pojo.Student;
+import com.zmy.pojo.Teacher;
 import com.zmy.util.DBUtil;
 
 import java.sql.Connection;
@@ -71,5 +72,31 @@ public class SignInDaoImpl implements SignInDao {
             DBUtil.closeAll(con,ps);
         }
 
+    }
+
+    /**
+     * 教师注成功将教师添加入数据库
+     * @param teacher
+     */
+    @Override
+    public void AddTeacher(Teacher teacher) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();//insert into student (sid,sname,pwd,tel)values(?,?,?,?)
+            String sql = "update teacher set sname=?,pwd=?,tel=?,role=? where sid=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,teacher.getTname());
+            ps.setObject(2,teacher.getPwd());
+            ps.setObject(3,teacher.getTel());
+            ps.setObject(4,teacher.getRole());
+            ps.setObject(5,teacher.getTid());
+            // 关闭资源
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
     }
 }

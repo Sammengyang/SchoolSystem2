@@ -3,6 +3,7 @@ package com.zmy.util;
 
 import com.zmy.dao.impl.ScoreDaoImpl;
 import com.zmy.dao.impl.SignInDaoImpl;
+import com.zmy.dao.impl.SignUpDaoImpl;
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.pojo.Student;
 import com.zmy.pojotrait.Stu_score;
@@ -48,5 +49,17 @@ public class TestUtil {
         ScoreDaoImpl scoreDao = new ScoreDaoImpl();
         List<Stu_score> scoreBysid = scoreDao.getScoreBysid(1001);
         System.out.println(scoreBysid);
+    }
+    @Test
+    public void testSignUp(){
+        SignUpDaoImpl signUpDao = new SignUpDaoImpl();
+        boolean teacher = signUpDao.findBySignUP(20011, "1", "teacher");
+        System.out.println(teacher);
+    }
+    @Test
+    public void testgetSTUbyID(){
+        StuDaoImpl stuDao = new StuDaoImpl();
+        Student stuByid = stuDao.getStuByid(1001);
+        System.out.println(stuByid);
     }
 }

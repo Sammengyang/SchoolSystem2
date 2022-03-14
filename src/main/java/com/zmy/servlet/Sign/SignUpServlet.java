@@ -1,6 +1,6 @@
-package com.zmy.servlet;
+package com.zmy.servlet.Sign;
 
-
+import com.zmy.dao.impl.SignUpDaoImpl;
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.pojo.Student;
 
@@ -15,30 +15,32 @@ import java.io.IOException;
 /**
  * @author Sam  Email:superdouble@yeah.net
  * @Description
- * @create 2022-03-11 21:23
+ * @create 2022-03-14 15:08
  */
-@WebServlet("/StuServlet")
-public class StuServlet  extends HttpServlet {
+@WebServlet("/SignUpServlet")
+public class SignUpServlet  extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String sids = req.getParameter("sid");
-        int sid = Integer.parseInt(sids);
+        String id = req.getParameter("sid");
+        int iid = Integer.parseInt(id);
         String password = req.getParameter("password");
         String role = req.getParameter("role");
         // 根据username 和 password 查询学生
-        StuDaoImpl stuDao = new StuDaoImpl();
-        Student student = stuDao.findStudentBySignUP(sid, password,role);
-        req.getSession().setAttribute("student",student);
-        if (student!=null){ // 登录成功，跳转到主页面
-            // 将登录人的sid存入cookie
-            Cookie cookie = new Cookie("sid",sids);
+        SignUpDaoImpl signUpDao = new SignUpDaoImpl();
+        boolean bySignUP = signUpDao.findBySignUP(iid, password, role);
+        if (bySignUP){ // 登录成功
+            req.getSession().setAttribute("role",role);
+            // 将登录人的sid存入session
+            req.getSession().setAttribute("id",id);
             resp.sendRedirect("../../view/student/stu_home.jsp");
-        }else{ // 登录失败，跳转到登录页面，并且保存账号
-            Cookie cookie = new Cookie("sid",sids);
+        }else{
+            // 将登录人的sid存入session
+            req.getSession().setAttribute("id",id);
             resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
         }
     }

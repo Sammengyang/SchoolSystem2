@@ -1,6 +1,9 @@
 package com.zmy.dao;
 
+import com.zmy.pojo.Scores;
 import com.zmy.pojo.Student;
+
+import java.util.List;
 
 
 /**
@@ -27,4 +30,14 @@ public interface StuDao {
      * @param role
      */
     void UpdateStudentInfo(String sid,String pwd,String role);
+
+    Student getStuByid(Integer id);
+
+    /**
+     * 根据学生的id查询学生的成绩
+     *
+     * @param id
+     * @return
+     */
+    List<Scores> getScoreBysid(Integer id);
 }

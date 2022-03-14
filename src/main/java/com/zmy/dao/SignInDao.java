@@ -1,6 +1,8 @@
 package com.zmy.dao;
 
+import com.aliyun.tea.Tea;
 import com.zmy.pojo.Student;
+import com.zmy.pojo.Teacher;
 
 /**
  * @author Sam  Email:superdouble@yeah.net
@@ -22,4 +24,7 @@ public interface SignInDao {
      * @param student
      */
     void AddStudent(Student student);
+
+    void AddTeacher(Teacher teacher);
+
 }

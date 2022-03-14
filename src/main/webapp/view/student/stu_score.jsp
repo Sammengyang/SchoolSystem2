@@ -1,7 +1,8 @@
 <%@ page import="com.zmy.servlet.stu.ScoreServlet" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="com.zmy.pojotrait.Stu_score" %><%--
+<%@ page import="com.zmy.pojotrait.Stu_score" %>
+<%@ page import="com.zmy.pojo.Scores" %><%--
   Created by IntelliJ IDEA.
   User: Sam
   Date: 2022/3/10
@@ -24,7 +25,7 @@
 
 </head>
     <%
-        List list = (List) session.getAttribute("list");
+        List<Scores> scores = (List) session.getAttribute("scores");
     %>
 <body>
     <table class="table table-hover">
@@ -38,19 +39,27 @@
             </tr>
         </thead>
         <tbody>
+<%--        <c:forEach items="${list}" var="el">--%>
+<%--            <tr>--%>
+<%--                <td>${el.getId()}</td>--%>
+<%--                <td>${el.getSid()}</td>--%>
+<%--                <td>${el.getCid()}</td>--%>
+<%--                <td>${el.getScore()}</td>--%>
+<%--                <td>${el.getExam_time()}</td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
         <%
-            if (list.size()!=0&&list!=null){
-                Iterator iterator = list.iterator();
-                while (iterator.hasNext()){
-                    Stu_score stuScore = (Stu_score) iterator.next();
+            if (scores.size()>0){
+                for (int i = 0; i < scores.size(); i++) {
+                    Scores score = scores.get(i);
         %>
-                <tr>
-                    <td><%=stuScore.getId()%></td>
-                    <td><%=stuScore.getSid()%></td>
-                    <td><%=stuScore.getCid()%></td>
-                    <td><%=stuScore.getScore()%></td>
-                    <td><%=stuScore.getExam_time()%></td>
-                </tr>
+            <tr>
+                <td><%=score.getId()%></td>
+                <td><%=score.getSid()%></td>
+                <td><%=score.getCid()%></td>
+                <td><%=score.getScore()%></td>
+                <td><%=score.getExam_time()%></td>
+            </tr>
         <%
                 }
             }

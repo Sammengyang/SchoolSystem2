@@ -102,7 +102,6 @@
             <a href="/view/SignIn/SignIn.jsp">注册</a>
         </div>
     </form>
-
 </div>
 </body>
 </html>
