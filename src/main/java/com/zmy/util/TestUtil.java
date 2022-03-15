@@ -1,7 +1,12 @@
 package com.zmy.util;
 
 
-import com.zmy.dao.impl.*;
+import com.zmy.dao.impl.SignInDaoImpl;
+import com.zmy.dao.impl.SignUpDaoImpl;
+import com.zmy.dao.impl.ScoreDaoImpl;
+import com.zmy.dao.impl.StuDaoImpl;
+import com.zmy.dao.impl.TeacherDaoImpl;
+import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.student.Student;
 import com.zmy.pojotrait.Stu_score;
 import org.junit.Test;
@@ -84,6 +89,32 @@ public class TestUtil {
         StuDaoImpl stuDao = new StuDaoImpl();
         List<Stu_score> scores = stuDao.getScoreBysid(1001, 1, 3);
         System.out.println(scores.size());
-
+    }
+    // 测试请假功能
+    @Test
+    public void testApplyHoliday(){
+        StuDaoImpl stuDao = new StuDaoImpl();
+        StuLeave stuLeave = new StuLeave();
+        stuLeave.setSid(1001);
+        stuLeave.setSname("sam");
+        stuLeave.setTid(20011);
+        stuLeave.setText("病假");
+        stuLeave.setStartTime("2020-12-12");
+        stuLeave.setEndTime("2020-12-13");
+        stuDao.applyHoliday(stuLeave);
+    }
+    // 测试查看历史假条
+    @Test
+    public void testGetHistory(){
+        StuDaoImpl stuDao = new StuDaoImpl();
+        List<StuLeave> historyHoliday = stuDao.getHistoryHoliday(1001);
+        System.out.println(historyHoliday.size());
+    }
+    // 测试教师查看请假申请
+    @Test
+    public void testCheck(){
+        TeacherDaoImpl teacherDao = new TeacherDaoImpl();
+        List<StuLeave> list = teacherDao.leave_for_approvalServlet(20011);
+        System.out.println(list.size());
     }
 }

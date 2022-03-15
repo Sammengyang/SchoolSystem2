@@ -1,5 +1,6 @@
 package com.zmy.dao;
 
+import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
 import com.zmy.pojo.teacher.Teacher;
 
@@ -44,4 +45,12 @@ public interface TeacherDao {
      * @return
      */
     Integer getMaxPageSize(Integer pageSize);
+
+    /**
+     *  根的据登录人id 查看收到请假申请
+     *
+     * @param tid 教师id
+     * @return 返回请假历史集合
+     */
+    List<StuLeave> leave_for_approvalServlet(Integer tid);
 }

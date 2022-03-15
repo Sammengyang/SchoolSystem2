@@ -2,6 +2,7 @@ package com.zmy.dao.impl;
 
 
 import com.zmy.dao.StuDao;
+import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.student.Student;
 import com.zmy.pojotrait.Stu_score;
 import com.zmy.util.DBUtil;
@@ -187,11 +188,11 @@ public class StuDaoImpl implements StuDao {
                     "from student s,course c,scores sc \n" +
                     "WHERE s.sid=? AND sc.sid=s.sid and sc.cid=c.cid limit ?,?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,id);
-            ps.setObject(2,start);
-            ps.setObject(3,pageSize);
+            ps.setObject(1, id);
+            ps.setObject(2, start);
+            ps.setObject(3, pageSize);
             rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Stu_score scores = new Stu_score(
                         rs.getInt("id"),
                         rs.getInt("sid"),
@@ -207,18 +208,19 @@ public class StuDaoImpl implements StuDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps,rs);
+            DBUtil.closeAll(con, ps, rs);
         }
         return list;
     }
 
     /**
-     *  根据id获取学生成绩最大页数
+     * 根据id获取学生成绩最大页数
+     *
      * @param id 学号
      * @return
      */
     @Override
-    public Integer getMaxPage(Integer id,Integer pageSize) {
+    public Integer getMaxPage(Integer id, Integer pageSize) {
         Integer MaxPageSize = 0;
         Connection con = null;
         PreparedStatement ps = null;
@@ -228,7 +230,7 @@ public class StuDaoImpl implements StuDao {
             String sql = "select count(s.sid) from student s,course c,scores sc \n" +
                     "WHERE s.sid=? AND sc.sid=s.sid and sc.cid=c.cid ";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,id);
+            ps.setObject(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
                 MaxPageSize = rs.getInt(1);
@@ -242,5 +244,62 @@ public class StuDaoImpl implements StuDao {
         return (int) Math.ceil(count);
     }
 
+    @Override
+    public void applyHoliday(StuLeave stuLeave) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "insert into written (sid,tid,text,startTime,endTime,state) values (?,?,?,?,?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, stuLeave.getSid());
+            ps.setObject(2, stuLeave.getTid());
+            ps.setObject(3, stuLeave.getText());
+            ps.setObject(4, stuLeave.getStartTime());
+            ps.setObject(5, stuLeave.getEndTime());
+            ps.setObject(6, stuLeave.getState());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con, ps);
+        }
+    }
 
+    @Override
+    public List<StuLeave> getHistoryHoliday(Integer id) {
+        List<StuLeave> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "SELECT sw.sid,sw.sname,sw.tid,t.tname,text,startTime,endTime,state  FROM teacher t,(\n" +
+                    "\tSELECT w.sid,stu.sname,w.tid,text,startTime,endTime,state  FROM\n" +
+                    "student stu,written w\n" +
+                    "where stu.sid=w.sid AND w.sid=?\n" +
+                    ") sw WHERE t.tid = sw.tid";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                StuLeave stuLeave = new StuLeave(
+                        rs.getInt("sid"),
+                        rs.getString("sname"),
+                        rs.getInt("tid"),
+                        rs.getString("tname"),
+                        rs.getString("text"),
+                        rs.getString("startTime"),
+                        rs.getString("endTime"),
+                        rs.getString("state")
+                );
+                list.add(stuLeave);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return list;
+    }
 }

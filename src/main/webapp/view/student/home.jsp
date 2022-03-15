@@ -38,6 +38,10 @@
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
+            $("#nav7").click(function (e) {
+                e.preventDefault();
+                $("#f1").attr("src",$(this).attr("href"));
+            });
             $("#stu_homework").click(function (e) {
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
@@ -47,6 +51,10 @@
                 $("#f1").attr("src",$(this).attr("href"));
             });
             $("#info").click(function (e) {
+                e.preventDefault();
+                $("#f1").attr("src",$(this).attr("href"));
+            });
+            $("#leave").click(function (e) {
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
@@ -74,14 +82,15 @@
     <div class="layui-header">
         <div class="layui-logo layui-hide-xs layui-bg-black"><img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbkimg.cdn.bcebos.com%2Fpic%2Ff31fbe096b63f6246b6028138d09fcf81a4c510f05c4&refer=http%3A%2F%2Fbkimg.cdn.bcebos.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649496736&t=d69e33270557ea73bec3daa7662adc2d" width="100%" height="100%"></div>
         <!-- 头部区域（可配合layui 已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left">
+        <ul class="layui-nav layui-layout-left" lay-filter="test">
             <c:if test="${role =='student'}">
                 <li class="layui-nav-item layui-hide-xs"><a id="nav1" href="/StuinfoServlet">个人信息</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav2" href="/ScoreServlet">历史成绩</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav3" href="stu_course.jsp">课表</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav4" href="stu_leave.jsp">请假申请</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="stu_message.jsp">消息查看</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="stu_repairs.jsp">故障报修</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="/StuHistoryHolidayServlet">请假记录</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="stu_message.jsp">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav7" href="stu_repairs.jsp">故障报修</a></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">作业</a>
                     <dl class="layui-nav-child">
@@ -92,7 +101,7 @@
             </c:if>
             <c:if test="${role =='teacher'}">
                 <li class="layui-nav-item layui-hide-xs"><a id="tinfo" href="">个人信息.</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a href="javascript:;">请假审核</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="leave" href="/leave_for_approvalServlet">请假审核</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="getScore" href="">发起调课</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="getCourse" href="/QueryAllScoreServlet">查看全班学生学分</a></li>
                 <li class="layui-nav-item">
@@ -153,15 +162,15 @@
     </div>
 
     <div class="layui-body">
-        <div style="padding: 0px;" id="divbody">内容主体区域 内容主体区域。记得修改 layui.css 和 js 的路径
-            <iframe id="f1" src="" width="100%" height="600px"></iframe>
+        <div style="padding: 0px;" id="divbody">
+            <iframe id="f1" src="" width="100%" height="800px"></iframe>
         </div>
     </div>
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        底部固定区域
-    </div>
+<%--    <div class="layui-footer">--%>
+<%--        <!-- 底部固定区域 -->--%>
+<%--        底部固定区域--%>
+<%--    </div>--%>
 </div>
 <script src="./layui/layui.js"></script>
 <script>

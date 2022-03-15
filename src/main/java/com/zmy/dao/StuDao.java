@@ -1,5 +1,6 @@
 package com.zmy.dao;
 
+import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.student.Student;
 import com.zmy.pojotrait.Stu_score;
 
@@ -56,4 +57,18 @@ public interface StuDao {
      * @return
      */
     Integer getMaxPage(Integer id,Integer pageSize);
+
+    /**
+     *  学生请假，向请假表插入数据
+     *
+     */
+    void applyHoliday(StuLeave stuLeave);
+
+    /**
+     *  根据登录人id查询请假历史
+     * @param id 登录人id
+     * @return
+     */
+    List<StuLeave> getHistoryHoliday(Integer id);
+
 }

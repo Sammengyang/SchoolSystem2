@@ -1,6 +1,5 @@
-package com.zmy.servlet.stu.scores;
+package com.zmy.servlet.stu;
 
-import com.zmy.dao.impl.ScoreDaoImpl;
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.pojotrait.Stu_score;
 

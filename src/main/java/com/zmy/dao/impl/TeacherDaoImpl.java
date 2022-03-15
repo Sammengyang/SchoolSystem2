@@ -1,6 +1,7 @@
 package com.zmy.dao.impl;
 
 import com.zmy.dao.TeacherDao;
+import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
 import com.zmy.pojo.teacher.Teacher;
 import com.zmy.util.DBUtil;
@@ -166,5 +167,46 @@ public class TeacherDaoImpl implements TeacherDao {
         }
         double count = MaxPageSize / pageSize * 1.0;
         return (int) Math.ceil(count);
+    }
+
+    /**
+     *  根的据登录人id 查看收到请假申请
+     *
+     * @param tid 教师id
+     * @return 返回请假历史集合
+     */
+    @Override
+    public List<StuLeave> leave_for_approvalServlet(Integer tid) {
+        List<StuLeave> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            // 查询该老师收到的请假申请
+            String sql = "SELECT sw.sid,sw.sname,sw.tid,t.tname,text,startTime,endTime,state  FROM teacher t,(\n" +
+                    "SELECT w.sid,stu.sname,w.tid,text,startTime,endTime,state  FROM\n" +
+                    "student stu,written w where stu.sid=w.sid \n" +
+                    ") sw WHERE t.tid = sw.tid and t.tid =?";
+            // 预编译sql语句
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,tid);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                StuLeave stuLeave = new StuLeave();
+                stuLeave.setSid(rs.getInt("sid"));
+                stuLeave.setSname(rs.getString("sname"));
+                stuLeave.setText(rs.getString("text"));
+                stuLeave.setStartTime(rs.getString("startTime"));
+                stuLeave.setEndTime(rs.getString("endTime"));
+                stuLeave.setState(rs.getString("state"));
+                list.add(stuLeave);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return list;
     }
 }
