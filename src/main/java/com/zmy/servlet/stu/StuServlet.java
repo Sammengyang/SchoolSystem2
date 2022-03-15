@@ -2,11 +2,10 @@ package com.zmy.servlet.stu;
 
 
 import com.zmy.dao.impl.StuDaoImpl;
-import com.zmy.pojo.Student;
+import com.zmy.pojo.student.Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +37,7 @@ public class StuServlet  extends HttpServlet {
             // 将角色存入session
             req.getSession().setAttribute("role",role);
             req.getSession().setAttribute("id",sid);
-            resp.sendRedirect("../../view/student/stu_home.jsp");
+            resp.sendRedirect("main/webapp/view/student/home.jsp");
         }else{ // 登录失败，跳转到登录页面，并且保存账号
             req.getSession().setAttribute("id",sid);
             resp.sendRedirect("../../view/SignUp/Sign_up.jsp");

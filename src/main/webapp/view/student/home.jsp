@@ -58,6 +58,11 @@
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
+            $("#getCourse").click(function (e) {
+                e.preventDefault();
+                $("#f1").attr("src",$(this).attr("href"));
+            });
+
         });
     </script>
 </head>
@@ -89,7 +94,7 @@
                 <li class="layui-nav-item layui-hide-xs"><a id="tinfo" href="">个人信息.</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a href="javascript:;">请假审核</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="getScore" href="">发起调课</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="getCourse" href="">查看全班学生学分</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="getCourse" href="/QueryAllScoreServlet">查看全班学生学分</a></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">作业</a>
                     <dl class="layui-nav-child">

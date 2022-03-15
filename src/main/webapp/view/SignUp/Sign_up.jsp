@@ -10,30 +10,6 @@
 <head>
     <title>登录</title>
     <script src="/js/jquery-3.6.0.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        // todo 数据无法转到servlet
-        // $(function () {
-        //     $("#signUp").click(function () {
-        //         // 获取账号框内容
-        //         var sid = $("input[name='sid']").val();
-        //         var password = $("input[name='password']").val();
-        //         var check1 = $('input:radio[id="role1"]:checked').val();
-        //         var check2 = $('input:radio[id="role2"]:checked').val();
-        //         if (sid == "" || password == "") {
-        //             alert("请将账号密码填写完整！")
-        //         } else {
-        //             if ("student"==check1 || "teacher"==check2){
-        //                 // 获取form对象
-        //                 var form = $("#register");
-        //                 form.submit;
-        //
-        //             }else{
-        //                 alert("请选择身份！");
-        //             }
-        //         }
-        //     });
-        // });
-    </script>
     <style>
         #register {
             margin-top: 300px;

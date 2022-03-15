@@ -1,8 +1,7 @@
 package com.zmy.dao;
 
-import com.aliyun.tea.Tea;
-import com.zmy.pojo.Student;
-import com.zmy.pojo.Teacher;
+import com.zmy.pojo.student.Student;
+import com.zmy.pojo.teacher.Teacher;
 
 /**
  * @author Sam  Email:superdouble@yeah.net

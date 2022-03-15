@@ -1,13 +1,11 @@
 package com.zmy.servlet.Sign;
 
 import com.zmy.dao.impl.SignUpDaoImpl;
-import com.zmy.dao.impl.StuDaoImpl;
-import com.zmy.pojo.Student;
-import com.zmy.pojo.Teacher;
+import com.zmy.pojo.student.Student;
+import com.zmy.pojo.teacher.Teacher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +43,7 @@ public class SignUpServlet  extends HttpServlet {
                 req.getSession().setAttribute("id",id);
                 // 将信息存入 session
                 req.getSession().setAttribute("user",student);
-                resp.sendRedirect("../../view/student/stu_home.jsp");
+                resp.sendRedirect("../../view/student/home.jsp");
             }else{
                 // 将登录人的sid存入session
                 req.getSession().setAttribute("id",id);
@@ -59,7 +57,7 @@ public class SignUpServlet  extends HttpServlet {
             req.getSession().setAttribute("id",id);
             // 将信息存入 session
             req.getSession().setAttribute("user",teacher);
-            resp.sendRedirect("../../view/student/stu_home.jsp");
+            resp.sendRedirect("../../view/student/home.jsp");
         }
     }
 }

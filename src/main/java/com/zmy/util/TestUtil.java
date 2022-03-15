@@ -1,11 +1,8 @@
 package com.zmy.util;
 
 
-import com.zmy.dao.impl.ScoreDaoImpl;
-import com.zmy.dao.impl.SignInDaoImpl;
-import com.zmy.dao.impl.SignUpDaoImpl;
-import com.zmy.dao.impl.StuDaoImpl;
-import com.zmy.pojo.Student;
+import com.zmy.dao.impl.*;
+import com.zmy.pojo.student.Student;
 import com.zmy.pojotrait.Stu_score;
 import org.junit.Test;
 
@@ -70,6 +67,23 @@ public class TestUtil {
         System.out.println(pagingScore);
         System.out.println(pagingScore.get(0).toString());
         System.out.println(pagingScore.get(1).toString());
+
+    }
+    @Test
+    public void testGetAllsocre(){
+        TeacherDaoImpl teacherDao = new TeacherDaoImpl();
+        // 教师获取到所有成绩
+//        List<ScoreVO> allStuScore = teacherDao.getAllStuScore();
+//        System.out.println(allStuScore.size());
+        // 获取最大页数
+        System.out.println(teacherDao.getMaxPageSize(3));
+    }
+    // 测试学生成绩分页
+    @Test
+    public void testGetStuScore(){
+        StuDaoImpl stuDao = new StuDaoImpl();
+        List<Stu_score> scores = stuDao.getScoreBysid(1001, 1, 3);
+        System.out.println(scores.size());
 
     }
 }

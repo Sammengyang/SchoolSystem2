@@ -8,29 +8,35 @@ import java.util.Date;
  * @create 2022-03-13 13:51
  */
 public class Stu_score {
-    private Integer id;
-    private Integer sid;
-    private String cid;
-    private String score;
-    private Date exam_time;
+    private Integer id; // 考试编号
+    private Integer sid; // 学号
+    private String  major; //专业
+    private String cname; // 课程名
+    private String credit; // 学分
+    private String score; // 成绩
+    private Date exam_time; // 考试时间
 
     public Stu_score() {
     }
 
-    public Stu_score(Integer id, Integer sid, String cid, String score, Date exam_time) {
+    public Stu_score(Integer id, Integer sid, String major, String cname, String credit, String score, Date exam_time) {
         this.id = id;
         this.sid = sid;
-        this.cid = cid;
+        this.major = major;
+        this.cname = cname;
+        this.credit = credit;
         this.score = score;
         this.exam_time = exam_time;
     }
 
     @Override
     public String toString() {
-        return "stu_score{" +
+        return "Stu_score{" +
                 "id=" + id +
                 ", sid=" + sid +
-                ", cid='" + cid + '\'' +
+                ", major='" + major + '\'' +
+                ", cname='" + cname + '\'' +
+                ", credit='" + credit + '\'' +
                 ", score='" + score + '\'' +
                 ", exam_time=" + exam_time +
                 '}';
@@ -52,12 +58,28 @@ public class Stu_score {
         this.sid = sid;
     }
 
-    public String getCid() {
-        return cid;
+    public String getMajor() {
+        return major;
     }
 
-    public void setCid(String cid) {
-        this.cid = cid;
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getCname() {
+        return cname;
+    }
+
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
+
+    public String getCredit() {
+        return credit;
+    }
+
+    public void setCredit(String credit) {
+        this.credit = credit;
     }
 
     public String getScore() {

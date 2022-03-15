@@ -1,6 +1,6 @@
 package com.zmy.dao;
 
-import com.zmy.pojo.Student;
+import com.zmy.pojo.student.Student;
 
 /**
  * @author Sam  Email:superdouble@yeah.net

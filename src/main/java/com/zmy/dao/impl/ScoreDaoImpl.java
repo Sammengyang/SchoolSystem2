@@ -42,7 +42,9 @@ public class ScoreDaoImpl implements ScoreDao {
                 Stu_score stuScore = new Stu_score(
                         rs.getInt("id"),
                         rs.getInt("sid"),
-                        rs.getString("cid"),
+                        rs.getString("major"),
+                        rs.getString("cname"),
+                        rs.getString("credit"),
                         rs.getString("score"),
                         rs.getDate("exam_time")
                 );
@@ -78,7 +80,9 @@ public class ScoreDaoImpl implements ScoreDao {
                 Stu_score stuScore = new Stu_score(
                         rs.getInt("id"),
                         rs.getInt("sid"),
-                        rs.getString("cid"),
+                        rs.getString("major"),
+                        rs.getString("cname"),
+                        rs.getString("credit"),
                         rs.getString("score"),
                         rs.getDate("exam_time")
                 );

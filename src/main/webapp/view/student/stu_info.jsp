@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false"%>
 
-<%@ page import="com.zmy.pojo.Student" %><%--
+<%@ page import="com.zmy.pojo.student.Student" %><%--
   Created by IntelliJ IDEA.
   User: Sam
   Date: 2022/3/10

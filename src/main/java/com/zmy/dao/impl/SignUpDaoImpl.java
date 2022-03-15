@@ -1,8 +1,8 @@
 package com.zmy.dao.impl;
 
 import com.zmy.dao.SignUpDao;
-import com.zmy.pojo.Student;
-import com.zmy.pojo.Teacher;
+import com.zmy.pojo.student.Student;
+import com.zmy.pojo.teacher.Teacher;
 import com.zmy.util.DBUtil;
 
 import java.sql.Connection;

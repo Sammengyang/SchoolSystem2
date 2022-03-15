@@ -1,7 +1,7 @@
 package com.zmy.servlet.stu;
 
 import com.zmy.dao.impl.StuDaoImpl;
-import com.zmy.pojo.Student;
+import com.zmy.pojo.student.Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,7 +1,7 @@
 package com.zmy.dao;
 
-import com.zmy.pojo.Scores;
-import com.zmy.pojo.Student;
+import com.zmy.pojo.student.Student;
+import com.zmy.pojotrait.Stu_score;
 
 import java.util.List;
 
@@ -39,5 +39,21 @@ public interface StuDao {
      * @param id
      * @return
      */
-    List<Scores> getScoreBysid(Integer id);
+    List<Stu_score> getScoreBysid(Integer id);
+
+    /**
+     *
+     * @param id  学生id
+     * @param page 页数
+     * @param pageSize 页面展示数据数
+     * @return
+     */
+    List<Stu_score> getScoreBysid(Integer id,Integer page,Integer pageSize);
+
+    /**
+     *  根据id获取该学省的成绩最大页数
+     * @param id 学号
+     * @return
+     */
+    Integer getMaxPage(Integer id,Integer pageSize);
 }
