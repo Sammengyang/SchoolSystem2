@@ -14,11 +14,14 @@ import java.io.IOException;
 public class PermitServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("PermitServlet......");
+        String id = request.getParameter("username");
+        System.out.println(id);
 
     }
 }

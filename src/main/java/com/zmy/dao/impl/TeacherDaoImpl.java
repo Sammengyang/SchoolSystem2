@@ -209,4 +209,9 @@ public class TeacherDaoImpl implements TeacherDao {
         }
         return list;
     }
+
+    @Override
+    public List<StuLeave> permitLeave() {
+        return null;
+    }
 }

@@ -53,4 +53,6 @@ public interface TeacherDao {
      * @return 返回请假历史集合
      */
     List<StuLeave> leave_for_approvalServlet(Integer tid);
+
+    List<StuLeave> permitLeave();
 }
