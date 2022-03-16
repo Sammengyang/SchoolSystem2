@@ -1,5 +1,6 @@
 package com.zmy.dao;
 
+import com.zmy.pojo.student.Massage;
 import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.student.Student;
 import com.zmy.pojotrait.Stu_score;
@@ -71,4 +72,19 @@ public interface StuDao {
      */
     List<StuLeave> getHistoryHoliday(Integer id);
 
+    /**
+     * 根据权限展示能看到的消息
+     *
+     * @param role 登录人角色
+     * @return
+     */
+    List<Massage> getMassage(String role);
+
+    /**
+     *  根据消息id修改消息状态
+     * @param id
+     * @param state
+     * @return
+     */
+    boolean viewMassage(Integer id,String state);
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>学生教务系统</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-3.6.0.js"></script>
     <%
         Cookie[] cookies = request.getCookies();
         String sid = String.valueOf(cookies[0]);
@@ -58,7 +58,7 @@
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
-            $("#stu_set").click(function (e) {
+            $("#getMsg").click(function (e) {
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
@@ -89,7 +89,7 @@
                 <li class="layui-nav-item layui-hide-xs"><a id="nav3" href="stu_course.jsp">课表</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav4" href="stu_leave.jsp">请假申请</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="/StuHistoryHolidayServlet">请假记录</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="stu_message.jsp">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="/GetMassageServlet">消息查看</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav7" href="stu_repairs.jsp">故障报修</a></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">作业</a>
@@ -104,6 +104,7 @@
                 <li class="layui-nav-item layui-hide-xs"><a id="leave" href="/leave_for_approvalServlet">请假审核</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="getScore" href="">发起调课</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="getCourse" href="/QueryAllScoreServlet">查看全班学生学分</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="getMsg" href="/GetMassageServlet">消息查看</a></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">作业</a>
                     <dl class="layui-nav-child">

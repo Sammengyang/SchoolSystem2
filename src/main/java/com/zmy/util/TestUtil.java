@@ -117,4 +117,20 @@ public class TestUtil {
         List<StuLeave> list = teacherDao.leave_for_approvalServlet(20011);
         System.out.println(list.size());
     }
+    // 测试审批假条
+    @Test
+    public void testPermit(){
+        TeacherDaoImpl teacherDao = new TeacherDaoImpl();
+        boolean b = teacherDao.permitLeave(1001, "已同意", "2020-10-13");
+        System.out.println(b);
+    }
+
+    // 测试学生老师查看消息
+    @Test
+    public void testst(){
+        StuDaoImpl stuDao = new StuDaoImpl();
+        stuDao.viewMassage(4564564,"已读");
+        TeacherDaoImpl teacherDao = new TeacherDaoImpl();
+        teacherDao.viewMasage(8795646,"已读");
+    }
 }

@@ -18,19 +18,15 @@ import java.util.List;
 public class leave_for_approvalServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("leave_for_approvalServlet");
         doPost(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("leave_for_approvalServlet");
         String id = (String) request.getSession().getAttribute("id");
-        System.out.println(id);
         Integer tid = Integer.parseInt(id);
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();
         List<StuLeave> leaveList = teacherDao.leave_for_approvalServlet(tid);
-        System.out.println(leaveList.size());
         request.getSession().setAttribute("leaveList",leaveList);
         response.sendRedirect("../../view/teacher/leave_for_approval.jsp");
     }

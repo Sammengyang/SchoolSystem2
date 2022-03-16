@@ -2,6 +2,7 @@ package com.zmy.dao.impl;
 
 
 import com.zmy.dao.StuDao;
+import com.zmy.pojo.student.Massage;
 import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.student.Student;
 import com.zmy.pojotrait.Stu_score;
@@ -301,5 +302,71 @@ public class StuDaoImpl implements StuDao {
             DBUtil.closeAll(con,ps,rs);
         }
         return list;
+    }
+
+    /**
+     * 根据权限展示能看到的消息
+     *
+     * @param role 登录人角色
+     * @return
+     */
+    @Override
+    public List<Massage> getMassage(String role) {
+        List<Massage> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from massage where role=? or role=1";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,role);
+            rs = ps.executeQuery();
+            while (rs.next()){
+               Massage massage = new Massage(
+                        rs.getInt("id"),
+                       rs.getString("pname"),
+                       rs.getString("title"),
+                       rs.getString("text"),
+                       rs.getDate("postTime"),
+                       rs.getString("role")
+               );
+                list.add(massage);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return list;
+    }
+
+    /**
+     *  根据消息id修改消息状态
+     * @param id
+     * @param state
+     * @return
+     */
+    @Override
+    public boolean viewMassage(Integer id, String state) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "update massage set state=? where id=?";
+            ps = con.prepareStatement(sql);
+            // 填充占位符，状态，id和请假时间
+            ps.setObject(1,state);
+            ps.setObject(2,id);
+            int i = ps.executeUpdate();
+            if (i>0){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return false;
     }
 }

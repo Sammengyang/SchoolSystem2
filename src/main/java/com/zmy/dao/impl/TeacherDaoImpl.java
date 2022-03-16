@@ -1,6 +1,7 @@
 package com.zmy.dao.impl;
 
 import com.zmy.dao.TeacherDao;
+import com.zmy.pojo.student.Massage;
 import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
 import com.zmy.pojo.teacher.Teacher;
@@ -210,8 +211,95 @@ public class TeacherDaoImpl implements TeacherDao {
         return list;
     }
 
+    /**
+     * 根据提交请假申请人的id和申请时间，对数据状态进行修改
+     *
+     * @param id    申请人id
+     * @param state
+     * @param startTime 离校时间
+     * @return
+     */
     @Override
-    public List<StuLeave> permitLeave() {
-        return null;
+    public boolean permitLeave(Integer id, String state,String startTime) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "update written set state=? where sid=? and startTime=?";
+            ps = con.prepareStatement(sql);
+            // 填充占位符，状态，id和请假时间
+            ps.setObject(1,state);
+            ps.setObject(2,id);
+            ps.setObject(3,startTime);
+            int i = ps.executeUpdate();
+            if (i>0){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return false;
+    }
+
+    /**
+     * 根据权限展示能看到的消息
+     *
+     * @param role 登录人角色 role为1是教师和同学可共同查看的通知
+     * @return
+     */
+    @Override
+    public List<Massage> getMassage(String role) {
+        List<Massage> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from massage where role=? or role=1";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,role);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Massage massage = new Massage(
+                        rs.getInt("id"),
+                        rs.getString("pname"),
+                        rs.getString("title"),
+                        rs.getString("text"),
+                        rs.getDate("postTime"),
+                        rs.getString("role")
+                );
+                list.add(massage);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return list;
+    }
+
+    @Override
+    public boolean viewMasage(Integer id,String state) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "update massage set state=? where id=?";
+            ps = con.prepareStatement(sql);
+            // 填充占位符，状态，id和请假时间
+            ps.setObject(1,state);
+            ps.setObject(2,id);
+            int i = ps.executeUpdate();
+            if (i>0){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return false;
     }
 }

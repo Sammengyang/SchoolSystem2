@@ -1,5 +1,6 @@
 package com.zmy.dao;
 
+import com.zmy.pojo.student.Massage;
 import com.zmy.pojo.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
 import com.zmy.pojo.teacher.Teacher;
@@ -54,5 +55,29 @@ public interface TeacherDao {
      */
     List<StuLeave> leave_for_approvalServlet(Integer tid);
 
-    List<StuLeave> permitLeave();
+    /**
+     * 根据提交请假申请人的id和申请时间，对数据状态进行修改
+     *
+     * @param id    申请人id
+     * @param state 假条状态
+     * @param startTime 离校时间
+     * @return
+     */
+    boolean permitLeave(Integer id,String state,String startTime);
+
+    /**
+     * 根据权限展示能看到的消息
+     *
+     * @param role 登录人角色
+     * @return
+     */
+    List<Massage> getMassage(String role);
+
+    /**
+     *  根据消息id修改消息状态
+     * @param id
+     * @param state
+     * @return
+     */
+    boolean viewMasage(Integer id,String state);
 }
