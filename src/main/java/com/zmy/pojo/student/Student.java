@@ -22,14 +22,6 @@ public class Student {
     public Student() {
     }
 
-    public Student(Integer sid, String sname, String pwd, String tel,String role) {
-        this.sid = sid;
-        this.sname = sname;
-        this.pwd = pwd;
-        this.tel = tel;
-        this.role = role;
-    }
-
     public Student(Integer sid, String sname, String gender, String pwd, String birthday, String inschool_time, String major, String tel, String role, String cid) {
         this.sid = sid;
         this.sname = sname;
@@ -41,6 +33,25 @@ public class Student {
         this.tel = tel;
         this.role = role;
         this.cid = cid;
+    }
+
+    public Student(String sname, String pwd, String sex, String bir, String insc, String major, String cid, String tel) {
+        this.sname = sname;
+        this.pwd = pwd;
+        this.gender = sex;
+        this.birthday = bir;
+        this.inschool_time = insc;
+        this.major = major;
+        this.cid = cid;
+        this.tel = tel;
+    }
+
+    public Student(Integer sid, String sname, String password, String tel, String role) {
+        this.sid=sid;
+        this.sname=sname;
+        this.pwd=password;
+        this.tel=tel;
+        this.role=role;
     }
 
     @Override

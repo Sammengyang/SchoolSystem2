@@ -26,16 +26,18 @@ public class PermitServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("PermitServlet......");
-//        Integer id = Integer.parseInt(request.getParameter("id"));
-        Integer id = 1001;
+        // 获取请假人id
+        Integer sid = Integer.parseInt(request.getParameter("sid"));
+        // 获取登录人id
+        Integer tid = Integer.parseInt((String) request.getSession().getAttribute("id"));
         String startTime = request.getParameter("startTime");
-//        String state = request.getParameter("state");
-        String state = "已批准";
-        System.out.println(id);
+        String state = request.getParameter("state");
+        System.out.println(sid);
+        System.out.println(tid);
         System.out.println(startTime);
         System.out.println(state);
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();
-        boolean b = teacherDao.permitLeave(id, state, startTime);
+        boolean b = teacherDao.permitLeave(sid, state, startTime);
         if (b){
             System.out.println("成功");
             response.setContentType("text/html;charset=utf-8");

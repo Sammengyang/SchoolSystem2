@@ -26,66 +26,63 @@
             integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
             crossorigin="anonymous"></script>
     <script>
-            function consent(){
+        $(function (){
+            $("#b1").click(function (){
                 //找到同行的id
                 var id = $(this).parent().parent().children().eq(0).text();
                 var startTime = $(this).parent().parent().children().eq(3).text();
                 alert(id+startTime);
-                // re
-                // $.ajax({ // todo 回调函数不执行 拒绝时无法发送数据到servlet
-                //     async: false,
-                //     type:"GET",
-                //     url:"/PermitServlet",//要达到的地址，这里填的是相对地址
-                //     data:{"id":id,"startTime":startTime,"state":"已批准"},// 数据
-                //     dataType:"text",//数据类型
-                //     success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
-                //         alert("d"+d);
-                //         if (d=="success"){
-                //             alert("success")
-                //             //$(this).parent().html("已批准");
-                //             $("#consent").html("已批准")
-                //         }else{
-                //            $(this).parent().html("已拒绝");
-                //             //$("#consent").html("已拒绝")
-                //
-                //         }
-                //     },
-                //     error:function (d,errorThrown){
-                //         $(this).parent().html("");
-                //     },
-                // });
-            };
+                $.ajax({ // todo 回调函数不执行 拒绝时无法发送数据到servlet
+                    type:"GET",
+                    url:"/PermitServlet",//要达到的地址，这里填的是相对地址
+                    data:{"sid":id,"startTime":startTime,"state":"已批准"},// 数据
+                    dataType:"text",//数据类型
+                    success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
+                        alert("d"+d);
+                        if (d=="success"){
+                            alert("success")
+                            $(this).parent().html("已批准");
+                        }else{
+                           $(this).parent().html("已拒绝");
+                        }
+                    },
+                    error:function (d,errorThrown){
+                        $(this).parent().html("");
+                    },
+                });
+                // 刷新当前页面
+                location.reload();
+            });
 
-            function refuse(){
+            $("#b2").click(function (){
                 alert("reject")
                 // 找到同行的id
                 var sid = $(this).parent().parent().children().eq(0).text();
-                var sstartTime = $(this).parent().parent().children().eq(3).text();
-                var sstr = sid+","+sstartTime+","+"已拒绝";
-                alert(sstr);
+                var startTime = $(this).parent().parent().children().eq(3).text();
+                alert(sid);
+                $.ajax({
+                    type:"GET",
+                    url:"/PermitServlet",//要达到的地址，这里填的是相对地址
+                    data:{"sid":sid,"startTime":startTime,"state":"已拒绝"},// 数据
+                    dataType:"text",//数据类型
+                    success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
+                        alert("d"+d);
+                        if (d=="success"){
+                           // $(this).parent().html("已拒绝");
 
+                        }else{
+                            $(this).parent().html("已批准");
+                        }
+                    },
+                    error:function (d,errorThrown){
+                        $(this).parent().html("");
+                    },
+                });
+                // 刷新当前页面
+                location.reload();
+            });
+        });
 
-
-                // $.ajax({
-                //     async: false,
-                //     type:"GET",
-                //     url:"/PermitServlet",//要达到的地址，这里填的是相对地址
-                //     data:"username="+str,// 数据
-                //     dataType:"text",//数据类型
-                //     success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
-                //         alert("d"+d);
-                //         if (d=="success"){
-                //            // $(this).parent().html("已拒绝");
-                //
-                //         }else{
-                //             $(this).parent().html("已批准");
-                //         }
-                //     },
-                //     error:function (d,errorThrown){
-                //         $(this).parent().html("");
-                //     },
-                // });
-            };
     </script>
 </head>
 <body>
@@ -116,13 +113,9 @@
                     <td>${el.state}</td>
                 </c:if>
                 <c:if test="${el.state=='' or el.state== null}">
-                    <td>
-                        <a class="consent" href="/PermitServlet?id=1001">
-                            <button type="button" onclick="consent()" class="btn btn-success">同意</button>
-                        </a>&nbsp;
-                        <a class="refuse" href="">
-                            <button type="button" onclick="refuse()" class="btn btn-danger">拒绝</button>
-                        </a>
+                    <td id="td1">
+                        <button id="b1" type="button" class="btn btn-success ">同意</button>
+                        <button id="b2" type="button" class="btn btn-danger">拒绝</button>
                     </td>
                 </c:if>
             </tr>

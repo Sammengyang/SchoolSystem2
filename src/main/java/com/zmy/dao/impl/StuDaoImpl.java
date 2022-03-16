@@ -1,6 +1,7 @@
 package com.zmy.dao.impl;
 
 
+import com.sun.xml.bind.v2.model.core.ID;
 import com.zmy.dao.StuDao;
 import com.zmy.pojo.student.Massage;
 import com.zmy.pojo.student.StuLeave;
@@ -69,15 +70,38 @@ public class StuDaoImpl implements StuDao {
     }
 
     /**
-     * @param sid
-     * @param pwd
-     * @param role
+     *
+     * @param sid 发起修改信息申请的人的id
+     * @param Student 存储要修改的信息
+     * @return
      */
     @Override
-    public void UpdateStudentInfo(String sid, String pwd, String role) {
+    public boolean UpdateStudentInfo(Integer sid,Student Student) {
         Connection con = null;
         PreparedStatement ps = null;
-        String sql = "insert into" + role + "values(?,?)";
+        try {
+            con = DBUtil.getCon();
+            String sql = "update student set sname=?, pwd=?,gender=?,birthday=?,inschool_time=?,major=?,cid=?,tel=? where sid=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,Student.getSname());
+            ps.setObject(2,Student.getPwd());
+            ps.setObject(3,Student.getGender());
+            ps.setObject(4,Student.getBirthday());
+            ps.setObject(5,Student.getInschool_time());
+            ps.setObject(6,Student.getMajor());
+            ps.setObject(7,Student.getCid());
+            ps.setObject(8,Student.getTel());
+            ps.setObject(9,sid);
+            int i = ps.executeUpdate();
+            if (i > 0){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return false;
     }
 
     /**
@@ -245,6 +269,10 @@ public class StuDaoImpl implements StuDao {
         return (int) Math.ceil(count);
     }
 
+    /**
+     *  学生请假
+     * @param stuLeave
+     */
     @Override
     public void applyHoliday(StuLeave stuLeave) {
         Connection con = null;
@@ -267,6 +295,12 @@ public class StuDaoImpl implements StuDao {
         }
     }
 
+    /**
+     * 通过id获取请假历史
+     *
+     * @param id 登录人id
+     * @return
+     */
     @Override
     public List<StuLeave> getHistoryHoliday(Integer id) {
         List<StuLeave> list = new ArrayList<>();
@@ -281,9 +315,9 @@ public class StuDaoImpl implements StuDao {
                     "where stu.sid=w.sid AND w.sid=?\n" +
                     ") sw WHERE t.tid = sw.tid";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,id);
+            ps.setObject(1, id);
             rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 StuLeave stuLeave = new StuLeave(
                         rs.getInt("sid"),
                         rs.getString("sname"),
@@ -299,7 +333,7 @@ public class StuDaoImpl implements StuDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps,rs);
+            DBUtil.closeAll(con, ps, rs);
         }
         return list;
     }
@@ -320,29 +354,30 @@ public class StuDaoImpl implements StuDao {
             con = DBUtil.getCon();
             String sql = "select * from massage where role=? or role=1";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,role);
+            ps.setObject(1, role);
             rs = ps.executeQuery();
-            while (rs.next()){
-               Massage massage = new Massage(
+            while (rs.next()) {
+                Massage massage = new Massage(
                         rs.getInt("id"),
-                       rs.getString("pname"),
-                       rs.getString("title"),
-                       rs.getString("text"),
-                       rs.getDate("postTime"),
-                       rs.getString("role")
-               );
+                        rs.getString("pname"),
+                        rs.getString("title"),
+                        rs.getString("text"),
+                        rs.getDate("postTime"),
+                        rs.getString("role")
+                );
                 list.add(massage);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps,rs);
+            DBUtil.closeAll(con, ps, rs);
         }
         return list;
     }
 
     /**
-     *  根据消息id修改消息状态
+     * 根据消息id修改消息状态
+     *
      * @param id
      * @param state
      * @return
@@ -356,16 +391,16 @@ public class StuDaoImpl implements StuDao {
             String sql = "update massage set state=? where id=?";
             ps = con.prepareStatement(sql);
             // 填充占位符，状态，id和请假时间
-            ps.setObject(1,state);
-            ps.setObject(2,id);
+            ps.setObject(1, state);
+            ps.setObject(2, id);
             int i = ps.executeUpdate();
-            if (i>0){
+            if (i > 0) {
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return false;
     }

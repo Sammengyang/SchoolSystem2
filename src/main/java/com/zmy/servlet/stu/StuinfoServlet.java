@@ -35,7 +35,7 @@ public class StuinfoServlet extends HttpServlet {
                 req.getSession().setAttribute("msg","没查到该学生信息");
             } else {
                 req.getSession().setAttribute("stuinfo",stuInfo);
-                resp.sendRedirect("view/student/stu_info.jsp");
+                resp.sendRedirect("view/student/Info.jsp");
             }
         }
     }

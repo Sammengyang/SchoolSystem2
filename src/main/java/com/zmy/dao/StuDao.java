@@ -24,14 +24,15 @@ public interface StuDao {
      */
     Student findStudentBySignUP(Integer sid, String pwd, String role);
 
+
     /**
-     * 学生注册
+     * 学生修改自己的个人信息
      *
-     * @param sid
-     * @param pwd
-     * @param role
+     * @param sid 发起修改信息申请的人的id
+     * @param student 存储修改的信息
+     * @return
      */
-    void UpdateStudentInfo(String sid,String pwd,String role);
+    boolean UpdateStudentInfo(Integer sid,Student student);
 
     Student getStuByid(Integer id);
 

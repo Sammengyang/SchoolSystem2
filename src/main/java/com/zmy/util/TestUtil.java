@@ -133,4 +133,13 @@ public class TestUtil {
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();
         teacherDao.viewMasage(8795646,"已读");
     }
+    // 测试学生修改信息
+    @Test
+    public void changeInfo(){
+        StuDaoImpl stuDao = new StuDaoImpl();
+        Student student = new Student(
+                "张孟洋","123456","男","2000-12-28","2018-09-01","电信","12","15039947675"
+        );
+        stuDao.UpdateStudentInfo(1006,student);
+    }
 }

@@ -22,52 +22,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <script>
         $(function (){
-           $("#view").click(function (){
-               // 找到同行的id
-               var id = $(this).parent().parent().children().eq(0).text();
-               alert(id);
-               $.ajax({
-                   async: false,
-                   type:"GET",
-                   url:"/ViewMassageServlet",//要达到的地址，这里填的是相对地址
-                   data:{"id":id,"state":"已读"},// 数据
-                   dataType:"text",//数据类型
-                   success:function (d){ //服务器执行完之后，接收服务器响应的数据
-                       alert("d"+d);
-                       if (d=="success"){
-                           $(this).parent().html("111");
-                       }else{
-                           $(this).parent().html("2222");
-                       }
-                   },
-                   error:function (d,errorThrown){
-                       $(this).parent().html("3333");
-                   },
-               });
-           });
-
-            $("#lose").click(function (){
+            $("#but1").click(function () {
                 // 找到同行的id
                 var id = $(this).parent().parent().children().eq(0).text();
-                alert(id);
-                $.ajax({
-                    async: false,
-                    type:"GET",
-                    url:"/ViewMassageServlet",//要达到的地址，这里填的是相对地址
-                    data:{"id":id,"state":"忽略"},// 数据
-                    dataType:"text",//数据类型
-                    success:function (d){ //服务器执行完之后，接收服务器响应的数据
-                        alert("d"+d);
-                        if (d=="success"){
-                            $(this).parent().html("111");
-                        }else{
-                            $(this).parent().html("2222");
-                        }
-                    },
-                    error:function (d,errorThrown){
-                        $(this).parent().html("3333");
-                    },
-                });
+                // 获同行的标题
+                var title = $(this).parent().parent().children().eq(1).text();
+                // 获取同行的发布内容
+                var texts = $(this).parent().parent().children().eq(2).text();
+                // 发布人
+                var pname = $(this).parent().parent().children().eq(3).text();
+                // 发布时间
+                var posttime = $(this).parent().parent().children().eq(4).text();
+                $("#myModalLabel").html(title);
+                $("#myModalLabel2").html(posttime);
+                $("#mytext").html(texts);
+                $("#pname").html(pname);
+
             });
         });
     </script>
@@ -94,14 +64,41 @@
                 <td>${el.pname}</td>
                 <td>${el.postTime}</td>
                 <td class="td1">
-                    <a class="view" href="">
-                        <button type="button" class="btn btn-success">查看</button>
-                    </a>&nbsp;
+                    <a id="but1"> <!--// todo 只能第一个按钮获取到信息-->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            查看
+                        </button>
+                    </a>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <div style="float: right">
+                    发布时间:<spamn id="myModalLabel2"></spamn>
+                </div>
+            </div>
+            <div class="modal-body" id="mytext">
+
+            </div>
+            <div class="modal-footer">
+                <div style="float: left">
+                    发布人:<span id="pname"></span>
+                </div>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
