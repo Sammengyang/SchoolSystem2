@@ -14,6 +14,13 @@ import java.util.List;
  */
 public interface TeacherDao {
     /**
+     * 通过id获取个人信息
+     *
+     * @param id
+     * @return
+     */
+    Teacher getMyInfo(Integer id);
+    /**
      * 根据身份确认查询的表格,根据账号密码来查询人
      *
      * @param tid
@@ -80,4 +87,13 @@ public interface TeacherDao {
      * @return
      */
     boolean viewMasage(Integer id,String state);
+
+    /**
+     *  根据教师id，修改自己的信息
+     *
+     * @param id 教师id
+     * @param teacher 存储要修改的信息
+     * @return
+     */
+    boolean UpdateTeacherInfo(Integer id,Teacher teacher);
 }

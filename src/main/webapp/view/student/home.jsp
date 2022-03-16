@@ -62,6 +62,10 @@
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
+            $("#tinfo").click(function (e) {
+                e.preventDefault();
+                $("#f1").attr("src",$(this).attr("href"));
+            });
             $("#file").click(function (e) {
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
@@ -100,7 +104,7 @@
                 </li>
             </c:if>
             <c:if test="${role =='teacher'}">
-                <li class="layui-nav-item layui-hide-xs"><a id="tinfo" href="">个人信息.</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="tinfo" href="/TeacherInifServlet">个人信息</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="leave" href="/leave_for_approvalServlet">请假审核</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="getScore" href="">发起调课</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="getCourse" href="/QueryAllScoreServlet">查看全班学生学分</a></li>

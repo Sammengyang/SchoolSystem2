@@ -36,6 +36,16 @@
                 $("input[name='cid']").val($("#cid").text());
                 $("input[name='tel']").val($("#tel").text());
             });
+
+            $("#but2").click(function () {
+                // 点击修改获取表格数据
+                $("input[name='tid']").val($("#tid").text());
+                $("input[name='tname']").val($("#tname").text());
+                $("input[name='pwd']").val($("#tpwd").text());
+                $("input[name='insc']").val($("#tinsc").text());
+                $("input[name='role']").val($("#role").text());
+                $("input[name='tel']").val($("#ttel").text());
+            });
         });
     </script>
 </head>
@@ -44,43 +54,43 @@
         <table class="table table-hover">
             <tr>
                 <td>学号:</td>
-                <td id="sid">${user.sid}</td>
+                <td id="sid">${stuinfo.sid}</td>
             </tr>
             <tr>
                 <td>姓名:</td>
-                <td id="sname">${user.sname}</td>
+                <td id="sname">${stuinfo.sname}</td>
             </tr>
             <tr>
                 <td>密码:</td>
-                <td id="pwd">${user.pwd}</td>
+                <td id="pwd">${stuinfo.pwd}</td>
             </tr>
             <tr>
                 <td>性别:</td>
-                <td id="sex">${user.gender}</td>
+                <td id="sex">${stuinfo.gender}</td>
             </tr>
             <tr>
                 <td>生日:</td>
-                <td id="bir">${user.birthday}</td>
+                <td id="bir">${stuinfo.birthday}</td>
             </tr>
 
             <tr>
                 <td>入学时间:</td>
-                <td id="insc">${user.inschool_time}</td>
+                <td id="insc">${stuinfo.inschool_time}</td>
             </tr>
             <tr>
                 <td>专业:</td>
-                <td id="major">${user.major}</td>
+                <td id="major">${stuinfo.major}</td>
             </tr>
             <tr>
                 <td>班级:</td>
-                <td id="cid">${user.cid}</td>
+                <td id="cid">${stuinfo.cid}</td>
             </tr>
             <tr>
                 <td>手机号:</td>
-                <td id="tel">${user.tel}</td>
+                <td id="tel">${stuinfo.tel}</td>
             </tr>
         </table>
-        <a id="but1"> <!--// todo 只能第一个按钮获取到信息-->
+        <a id="but1">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 修改
@@ -147,56 +157,77 @@
         <table class="table table-hover">
             <tr>
                 <td>教师编号:</td>
-                <td>${user.tid}</td>
+                <td id="tid">${myInfo.tid}</td>
             </tr>
             <tr>
                 <td>姓名:</td>
-                <td>${user.tname}</td>
+                <td id="tname">${myInfo.tname}</td>
             </tr>
             <tr>
                 <td>密码:</td>
-                <td>${user.pwd}</td>
+                <td id="tpwd">${myInfo.pwd}</td>
             </tr>
             <tr>
                 <td>职位:</td>
-                <td>${user.role}</td>
+                <td id="role">${myInfo.role}</td>
             </tr>
             <tr>
-                <td>入职时间:</td>
-                <td>${user.inschool_time}</td>
+                <td id="tinsc">入职时间:</td>
+                <td>${myInfo.inschool_time}</td>
             </tr>
             <tr>
-                <td>手机号:</td>
-                <td>${student.tel}</td>
+                <td id="ttel">手机号:</td>
+                <td>${myInfo.tel}</td>
             </tr>
         </table>
 
-        <a id="but2"> <!--// todo 只能第一个按钮获取到信息-->
+        <a id="but2">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                查看
+                修改
             </button>
         </a>
-        <!-- Modal -->
+
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel1">Personal Information</h4>
-                        <div style="float: right">
-                            发布时间:<spamn id="myModalLabel2"></spamn>
-                        </div>
                     </div>
-                    <div class="modal-body" id="mytext">
+                    <div class="modal-body">
+                        <form action="/TeaChangeInfoServlet" method="post">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon11">教师编号</span>
+                                <input type="text" class="form-control" name="tid" placeholder="教师编号" readonly="readonly" aria-describedby="sizing-addon3">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon22">姓名</span>
+                                <input type="text" class="form-control" name="tname" placeholder="姓名" aria-describedby="sizing-addon3">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon33">密码</span>
+                                <input type="text" class="form-control" name="pwd" placeholder="密码" aria-describedby="sizing-addon3">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon44">入职时间</span>
+                                <input type="text" class="form-control" name="insc" placeholder="入学时间" aria-describedby="sizing-addon3">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon55">职位</span>
+                                <input type="text" class="form-control" name="role" placeholder="值位" aria-describedby="sizing-addon3">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon66">手机号</span>
+                                <input type="text" class="form-control" name="tel" placeholder="手机号" aria-describedby="sizing-addon3">
+                            </div><br>
+                            <div class="modal-footer" style="margin-left: 200px">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <div style="float: left">
-                            发布人:<span id="pname"></span>
-                        </div>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ package com.zmy.dao.impl;
 import com.zmy.dao.TeacherDao;
 import com.zmy.pojo.student.Massage;
 import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojo.student.Student;
 import com.zmy.pojo.teacher.ScoreVO;
 import com.zmy.pojo.teacher.Teacher;
 import com.zmy.util.DBUtil;
@@ -20,6 +21,35 @@ import java.util.List;
  * @create 2022-03-14 14:40
  */
 public class TeacherDaoImpl implements TeacherDao {
+    @Override
+    public Teacher getMyInfo(Integer id) {
+        Teacher teacher = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql ="select * from teacher where tid=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                teacher=new Teacher(
+                        rs.getInt("tid"),
+                        rs.getString("tname"),
+                        rs.getString("pwd"),
+                        rs.getString("role"),
+                        rs.getDate("inschool_time"),
+                        rs.getString("tel")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return teacher;
+    }
+
     /**
      * 根据role和账号，密码判断是否登录成功
      *
@@ -280,6 +310,13 @@ public class TeacherDaoImpl implements TeacherDao {
         return list;
     }
 
+    /**
+     *  根据id查看能看的通知
+     *
+     * @param id
+     * @param state
+     * @return
+     */
     @Override
     public boolean viewMasage(Integer id,String state) {
         Connection con = null;
@@ -293,6 +330,39 @@ public class TeacherDaoImpl implements TeacherDao {
             ps.setObject(2,id);
             int i = ps.executeUpdate();
             if (i>0){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return false;
+    }
+
+    /**
+     * 根据教师id，修改自己的信息
+     *
+     * @param id 教师id
+     * @param teacher 存储要修改的信息
+     * @return
+     */
+    @Override
+    public boolean UpdateTeacherInfo(Integer id, Teacher teacher) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "update teacher set tname=?, pwd=?,role=?,inschool_time=?,tel=? where sid=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, teacher.getTname());
+            ps.setObject(2,teacher.getPwd());
+            ps.setObject(3,teacher.getRole());
+            ps.setObject(4,teacher.getInschool_time());
+            ps.setObject(5,teacher.getTel());
+            ps.setObject(6,id);
+            int i = ps.executeUpdate();
+            if (i > 0){
                 return true;
             }
         } catch (SQLException e) {
