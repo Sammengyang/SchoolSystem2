@@ -1,4 +1,4 @@
-package com.zmy.pojotrait;
+package com.zmy.pojotrait.student;
 
 import java.util.Date;
 

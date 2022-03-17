@@ -1,9 +1,9 @@
 package com.zmy.dao;
 
-import com.zmy.pojo.student.Massage;
-import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojotrait.student.Massage;
+import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.student.Student;
-import com.zmy.pojotrait.Stu_score;
+import com.zmy.pojotrait.student.Stu_score;
 
 import java.util.List;
 

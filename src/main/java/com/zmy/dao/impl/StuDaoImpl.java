@@ -1,12 +1,11 @@
 package com.zmy.dao.impl;
 
 
-import com.sun.xml.bind.v2.model.core.ID;
 import com.zmy.dao.StuDao;
-import com.zmy.pojo.student.Massage;
-import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojotrait.student.Massage;
+import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.student.Student;
-import com.zmy.pojotrait.Stu_score;
+import com.zmy.pojotrait.student.Stu_score;
 import com.zmy.util.DBUtil;
 
 

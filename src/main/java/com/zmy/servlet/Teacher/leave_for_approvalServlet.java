@@ -6,7 +6,7 @@ package com.zmy.servlet.Teacher; /**
  */
 
 import com.zmy.dao.impl.TeacherDaoImpl;
-import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojotrait.student.StuLeave;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,6 +23,7 @@ public class leave_for_approvalServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("leave_for_approvalServlet");
         String id = (String) request.getSession().getAttribute("id");
         Integer tid = Integer.parseInt(id);
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();

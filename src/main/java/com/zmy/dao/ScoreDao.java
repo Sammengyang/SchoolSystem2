@@ -1,6 +1,6 @@
 package com.zmy.dao;
 
-import com.zmy.pojotrait.Stu_score;
+import com.zmy.pojotrait.student.Stu_score;
 
 import java.util.List;
 

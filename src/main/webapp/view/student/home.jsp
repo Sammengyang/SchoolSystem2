@@ -94,7 +94,9 @@
                 <li class="layui-nav-item layui-hide-xs"><a id="nav4" href="stu_leave.jsp">请假申请</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="/StuHistoryHolidayServlet">请假记录</a></li>
                 <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="/GetMassageServlet">消息查看</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav7" href="stu_repairs.jsp">故障报修</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav7" href="/">查看作业</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav8" href="/">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a id="nav9" href="stu_repairs.jsp">故障报修</a></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">作业</a>
                     <dl class="layui-nav-child">

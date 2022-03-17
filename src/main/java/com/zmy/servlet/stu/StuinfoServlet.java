@@ -24,7 +24,6 @@ public class StuinfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("StuinfoServlet");
         Integer id = Integer.parseInt((String) req.getSession().getAttribute("id")) ;
         if (id == null) {
             resp.sendRedirect("../../view/SignUp/Sign_up.jsp");
@@ -36,7 +35,6 @@ public class StuinfoServlet extends HttpServlet {
                 req.getSession().setAttribute("msg","没查到该学生信息");
             } else {
                 req.getSession().setAttribute("stuinfo",stuInfo);
-                System.out.println(stuInfo);
                 resp.sendRedirect("../../view/student/Info.jsp");
             }
         }

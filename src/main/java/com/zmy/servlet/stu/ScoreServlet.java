@@ -1,7 +1,7 @@
 package com.zmy.servlet.stu;
 
 import com.zmy.dao.impl.StuDaoImpl;
-import com.zmy.pojotrait.Stu_score;
+import com.zmy.pojotrait.student.Stu_score;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

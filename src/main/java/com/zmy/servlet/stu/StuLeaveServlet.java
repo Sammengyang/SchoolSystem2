@@ -6,7 +6,7 @@ package com.zmy.servlet.stu; /**
  */
 
 import com.zmy.dao.impl.StuDaoImpl;
-import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojotrait.student.StuLeave;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

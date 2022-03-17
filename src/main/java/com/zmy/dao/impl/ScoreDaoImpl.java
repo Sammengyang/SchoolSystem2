@@ -1,7 +1,7 @@
 package com.zmy.dao.impl;
 
 import com.zmy.dao.ScoreDao;
-import com.zmy.pojotrait.Stu_score;
+import com.zmy.pojotrait.student.Stu_score;
 import com.zmy.util.DBUtil;
 
 import java.sql.Connection;

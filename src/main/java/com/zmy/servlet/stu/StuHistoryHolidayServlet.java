@@ -6,12 +6,11 @@ package com.zmy.servlet.stu; /**
  */
 
 import com.zmy.dao.impl.StuDaoImpl;
-import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojotrait.student.StuLeave;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.xml.transform.dom.DOMSource;
 import java.io.IOException;
 import java.util.List;
 

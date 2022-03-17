@@ -1,7 +1,7 @@
 package com.zmy.dao;
 
-import com.zmy.pojo.student.Massage;
-import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojotrait.student.Massage;
+import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
 import com.zmy.pojo.teacher.Teacher;
 

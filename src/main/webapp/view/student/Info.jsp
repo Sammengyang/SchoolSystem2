@@ -90,12 +90,14 @@
                 <td id="tel">${stuinfo.tel}</td>
             </tr>
         </table>
-        <a id="but1">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                修改
-            </button>
-        </a>
+        <div style="margin-left: 500px">
+            <a id="but1">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    修改
+                </button>
+            </a>
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -157,36 +159,38 @@
         <table class="table table-hover">
             <tr>
                 <td>教师编号:</td>
-                <td id="tid">${myInfo.tid}</td>
+                <td id="tid">${teacher.tid}</td>
             </tr>
             <tr>
                 <td>姓名:</td>
-                <td id="tname">${myInfo.tname}</td>
+                <td id="tname">${teacher.tname}</td>
             </tr>
             <tr>
                 <td>密码:</td>
-                <td id="tpwd">${myInfo.pwd}</td>
+                <td id="tpwd">${teacher.pwd}</td>
             </tr>
             <tr>
                 <td>职位:</td>
-                <td id="role">${myInfo.role}</td>
+                <td id="role">${teacher.role}</td>
             </tr>
             <tr>
                 <td id="tinsc">入职时间:</td>
-                <td>${myInfo.inschool_time}</td>
+                <td>${teacher.inschool_time}</td>
             </tr>
             <tr>
                 <td id="ttel">手机号:</td>
-                <td>${myInfo.tel}</td>
+                <td>${teacher.tel}</td>
             </tr>
         </table>
 
-        <a id="but2">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                修改
-            </button>
-        </a>
+        <div style="margin-left: 800px">
+            <a id="but2">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    修改
+                </button>
+            </a>
+        </div>
 
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -199,7 +203,7 @@
                         <form action="/TeaChangeInfoServlet" method="post">
                             <div class="input-group input-group-sm">
                                 <span class="input-group-addon" id="sizing-addon11">教师编号</span>
-                                <input type="text" class="form-control" name="tid" placeholder="教师编号" readonly="readonly" aria-describedby="sizing-addon3">
+                                <input type="text" class="form-control" name="tid" readonly="readonly" placeholder="教师编号" readonly="readonly" aria-describedby="sizing-addon3">
                             </div><br>
                             <div class="input-group input-group-sm">
                                 <span class="input-group-addon" id="sizing-addon22">姓名</span>
@@ -211,7 +215,7 @@
                             </div><br>
                             <div class="input-group input-group-sm">
                                 <span class="input-group-addon" id="sizing-addon44">入职时间</span>
-                                <input type="text" class="form-control" name="insc" placeholder="入学时间" aria-describedby="sizing-addon3">
+                                <input type="text" class="form-control" readonly="readonly" name="insc" placeholder="入学时间" aria-describedby="sizing-addon3">
                             </div><br>
                             <div class="input-group input-group-sm">
                                 <span class="input-group-addon" id="sizing-addon55">职位</span>

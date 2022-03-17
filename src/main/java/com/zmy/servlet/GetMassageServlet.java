@@ -7,7 +7,7 @@ package com.zmy.servlet; /**
 
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.dao.impl.TeacherDaoImpl;
-import com.zmy.pojo.student.Massage;
+import com.zmy.pojotrait.student.Massage;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

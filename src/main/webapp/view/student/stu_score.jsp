@@ -2,7 +2,7 @@
 <%@ page import="com.zmy.servlet.stu.ScoreServlet" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="com.zmy.pojotrait.Stu_score" %>
+<%@ page import="com.zmy.pojotrait.student.Stu_score" %>
 <%--
   Created by IntelliJ IDEA.
   User: Sam

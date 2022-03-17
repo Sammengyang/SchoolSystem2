@@ -1,9 +1,8 @@
 package com.zmy.dao.impl;
 
 import com.zmy.dao.TeacherDao;
-import com.zmy.pojo.student.Massage;
-import com.zmy.pojo.student.StuLeave;
-import com.zmy.pojo.student.Student;
+import com.zmy.pojotrait.student.Massage;
+import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
 import com.zmy.pojo.teacher.Teacher;
 import com.zmy.util.DBUtil;
@@ -353,14 +352,12 @@ public class TeacherDaoImpl implements TeacherDao {
         PreparedStatement ps = null;
         try {
             con = DBUtil.getCon();
-            String sql = "update teacher set tname=?, pwd=?,role=?,inschool_time=?,tel=? where sid=?";
+            String sql = "update teacher set tname=?, pwd=?,tel=? where tid=?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1, teacher.getTname());
+            ps.setObject(1,teacher.getTname());
             ps.setObject(2,teacher.getPwd());
-            ps.setObject(3,teacher.getRole());
-            ps.setObject(4,teacher.getInschool_time());
-            ps.setObject(5,teacher.getTel());
-            ps.setObject(6,id);
+            ps.setObject(3,teacher.getTel());
+            ps.setObject(4,id);
             int i = ps.executeUpdate();
             if (i > 0){
                 return true;

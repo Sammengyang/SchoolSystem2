@@ -6,9 +6,10 @@ import com.zmy.dao.impl.SignUpDaoImpl;
 import com.zmy.dao.impl.ScoreDaoImpl;
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.dao.impl.TeacherDaoImpl;
-import com.zmy.pojo.student.StuLeave;
+import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.student.Student;
-import com.zmy.pojotrait.Stu_score;
+import com.zmy.pojo.teacher.Teacher;
+import com.zmy.pojotrait.student.Stu_score;
 import org.junit.Test;
 
 import java.util.List;
@@ -133,13 +134,19 @@ public class TestUtil {
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();
         teacherDao.viewMasage(8795646,"已读");
     }
-    // 测试学生修改信息
+    // 测试学生和教师修改信息
     @Test
     public void changeInfo(){
-        StuDaoImpl stuDao = new StuDaoImpl();
-        Student student = new Student(
-                "张孟洋","123456","男","2000-12-28","2018-09-01","电信","12","15039947675"
-        );
-        stuDao.UpdateStudentInfo(1006,student);
+        // 学生
+//        StuDaoImpl stuDao = new StuDaoImpl();
+//        Student student = new Student(
+//                "张孟洋","123456","男","2000-12-28","2018-09-01","电信","12","15039947675"
+//        );
+//        stuDao.UpdateStudentInfo(1006,student);
+        // 教师
+        TeacherDaoImpl teacherDao = new TeacherDaoImpl();
+        Teacher teacher = new Teacher("sam","2","110");
+        boolean b = teacherDao.UpdateTeacherInfo(20011, teacher);
+        System.out.println(b);
     }
 }

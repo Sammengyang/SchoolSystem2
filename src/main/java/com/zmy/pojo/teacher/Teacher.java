@@ -18,6 +18,12 @@ public class Teacher {
     public Teacher() {
     }
 
+    public Teacher(String tname, String pwd,  String tel) {
+        this.tname = tname;
+        this.pwd = pwd;
+        this.tel = tel;
+    }
+
     public Teacher(Integer tid, String tname, String pwd, String role, Date inschool_time, String tel) {
         this.tid = tid;
         this.tname = tname;
