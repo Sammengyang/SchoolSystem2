@@ -1,6 +1,7 @@
 package com.zmy.dao.impl;
 
 import com.zmy.dao.TeacherDao;
+import com.zmy.pojotrait.student.HomeWork;
 import com.zmy.pojotrait.student.Massage;
 import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
@@ -368,5 +369,62 @@ public class TeacherDaoImpl implements TeacherDao {
             DBUtil.closeAll(con,ps);
         }
         return false;
+    }
+
+    /**
+     * 发布作业
+     *
+     * @param homeWork
+     */
+    @Override
+    public void PostHomeWork(HomeWork homeWork) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "insert into homework (tid,cid,text,startTime,endTime)values(?,?,?,?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,homeWork.getTid());
+            ps.setObject(2,homeWork.getCid());
+            ps.setObject(3,homeWork.getText());
+            ps.setObject(4,homeWork.getStartTime());
+            ps.setObject(5,homeWork.getEndTime());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+    }
+
+    @Override
+    public List<HomeWork> getHomeWork(Integer id) {
+        List<HomeWork> list = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            list = new ArrayList<>();
+            con = DBUtil.getCon();
+            String sql = "select * from homework where tid=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                HomeWork homeWork = new HomeWork(
+                        rs.getInt("tid"),
+                        rs.getInt("cid"),
+                        rs.getString("text"),
+                        rs.getString("startTime"),
+                        rs.getString("endTime")
+                );
+                list.add(homeWork);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return list;
     }
 }

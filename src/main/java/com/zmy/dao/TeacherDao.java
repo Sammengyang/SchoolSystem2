@@ -1,5 +1,6 @@
 package com.zmy.dao;
 
+import com.zmy.pojotrait.student.HomeWork;
 import com.zmy.pojotrait.student.Massage;
 import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.teacher.ScoreVO;
@@ -96,4 +97,21 @@ public interface TeacherDao {
      * @return
      */
     boolean UpdateTeacherInfo(Integer id,Teacher teacher);
+
+    /**
+     * 教师发布作业
+     *
+     * @param homeWork
+     */
+    void PostHomeWork(HomeWork homeWork);
+
+    /**
+     *  根据id 查看自己发布的作业
+     *
+     * @param id 教师编号
+     * @return list 返回作业集合
+     */
+    List<HomeWork> getHomeWork(Integer id);
+
+//    List<HomeWork> getAllHomeWork();
 }

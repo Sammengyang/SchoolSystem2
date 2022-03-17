@@ -1,5 +1,6 @@
 package com.zmy.dao;
 
+import com.zmy.pojotrait.student.HomeWork;
 import com.zmy.pojotrait.student.Massage;
 import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.student.Student;
@@ -88,4 +89,26 @@ public interface StuDao {
      * @return
      */
     boolean viewMassage(Integer id,String state);
+
+    /**
+     *
+     * @param cid   根据cid 查看自己的作业
+     * @return
+     */
+    List<HomeWork> getStuHomeWork(Integer cid);
+
+    /**
+     *  提交作业
+     *
+     * @param homeWork
+     */
+    void submitWork(HomeWork homeWork);
+
+    /**
+     *   根据sid获取cid
+     *
+     * @param sid  学号
+     * @return
+     */
+    Integer getCid(Integer sid);
 }

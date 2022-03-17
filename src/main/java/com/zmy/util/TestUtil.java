@@ -6,12 +6,16 @@ import com.zmy.dao.impl.SignUpDaoImpl;
 import com.zmy.dao.impl.ScoreDaoImpl;
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.dao.impl.TeacherDaoImpl;
+import com.zmy.pojotrait.student.HomeWork;
 import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.student.Student;
 import com.zmy.pojo.teacher.Teacher;
 import com.zmy.pojotrait.student.Stu_score;
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -148,5 +152,25 @@ public class TestUtil {
         Teacher teacher = new Teacher("sam","2","110");
         boolean b = teacherDao.UpdateTeacherInfo(20011, teacher);
         System.out.println(b);
+    }
+
+    // 发布作业
+
+    @Test
+    public void postWork(){
+        TeacherDaoImpl teacherDao = new TeacherDaoImpl();
+        HomeWork homeWork = new HomeWork(20011,12,"草","2020-12-12","2020-12-13");
+        teacherDao.PostHomeWork(homeWork);
+    }
+    // 学生查看作业
+    @Test
+    public void testviewH(){
+//        StuDaoImpl stuDao = new StuDaoImpl();
+//        List<HomeWork> stuHomeWork = stuDao.getStuHomeWork(12);
+//        System.out.println(stuHomeWork.get(0).toString());
+
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        String submitTime = sf.format(new Date());
+        System.out.println("submitTime = " + submitTime);
     }
 }

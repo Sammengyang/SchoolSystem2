@@ -27,7 +27,7 @@
             crossorigin="anonymous"></script>
     <script>
         $(function (){
-            $("#b1").click(function (){
+            $("button[name='b1']").click(function (){
                 //找到同行的id
                 var id = $(this).parent().parent().children().eq(0).text();
                 var startTime = $(this).parent().parent().children().eq(3).text();
@@ -53,7 +53,7 @@
                 location.reload();
             });
 
-            $("#b2").click(function (){
+            $("button[name='b2']").click(function (){
                 // 找到同行的id
                 var sid = $(this).parent().parent().children().eq(0).text();
                 var startTime = $(this).parent().parent().children().eq(3).text();
@@ -62,18 +62,6 @@
                     url:"/PermitServlet",//要达到的地址，这里填的是相对地址
                     data:{"sid":sid,"startTime":startTime,"state":"已拒绝"},// 数据
                     dataType:"text",//数据类型
-                    // success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
-                    //     alert("d"+d);
-                    //     if (d=="success"){
-                    //        // $(this).parent().html("已拒绝");
-                    //
-                    //     }else{
-                    //         $(this).parent().html("已批准");
-                    //     }
-                    // },
-                    // error:function (d,errorThrown){
-                    //     $(this).parent().html("");
-                    // },
                 });
                 // 刷新当前页面
                 location.reload();
@@ -111,8 +99,8 @@
                 </c:if>
                 <c:if test="${el.state=='' or el.state== null}">
                     <td id="td1">
-                        <button id="b1" type="button" class="btn btn-success ">同意</button>
-                        <button id="b2" type="button" class="btn btn-danger">拒绝</button>
+                        <button name="b1" type="button" class="btn btn-success ">同意</button>
+                        <button name="b2" type="button" class="btn btn-danger">拒绝</button>
                     </td>
                 </c:if>
             </tr>

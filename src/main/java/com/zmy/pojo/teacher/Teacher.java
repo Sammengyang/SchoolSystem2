@@ -33,6 +33,7 @@ public class Teacher {
         this.tel = tel;
     }
 
+
     public Integer getTid() {
         return tid;
     }

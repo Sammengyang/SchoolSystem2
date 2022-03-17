@@ -8,6 +8,7 @@ package com.zmy.servlet.Teacher; /**
 import com.zmy.dao.impl.StuDaoImpl;
 import com.zmy.dao.impl.TeacherDaoImpl;
 import com.zmy.pojo.student.Student;
+import com.zmy.pojo.teacher.Teacher;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,28 +25,19 @@ public class TeaChangeInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");  // todo 教师改变个人信息
         Integer id = Integer.parseInt((String) request.getSession().getAttribute("id"));
-        System.out.println(request.getParameter("sex"));
-        System.out.println(request.getParameter("major"));
-        Student student = new Student(
-                request.getParameter("sname"),
+        Teacher teacher1 = new Teacher(
+                request.getParameter("tname"),
                 request.getParameter("pwd"),
-                request.getParameter("sex"),
-                request.getParameter("bir"),
-                request.getParameter("insc"),
-                request.getParameter("major"),
-                request.getParameter("cid"),
                 request.getParameter("tel")
         );
         TeacherDaoImpl teacherDao = new TeacherDaoImpl();
-
-        StuDaoImpl stuDao = new StuDaoImpl();
-        boolean b = stuDao.UpdateStudentInfo(id, student);
+        boolean b = teacherDao.UpdateTeacherInfo(id, teacher1);
         if (b){
             // 查询用户信息
-            Student stu = stuDao.getStuByid(id);
-            request.getSession().setAttribute("user",stu);
+            Teacher teacher = teacherDao.getMyInfo(id);
+            request.getSession().setAttribute("teacher",teacher);
             response.sendRedirect("../../view/student/Info.jsp");
         }
     }

@@ -31,11 +31,9 @@ public class TeacherInifServlet extends HttpServlet {
         } else {
             // 根据id查询数据库   查询教师信息
             TeacherDaoImpl teacherDao = new TeacherDaoImpl();
-            Teacher teacher = new Teacher(tname,pwd,tel);
-            boolean b = teacherDao.UpdateTeacherInfo(id,teacher);
+            Teacher teacher = teacherDao.getMyInfo(id);
             // 修改成功
-            if (b) {
-                teacher = teacherDao.getMyInfo(id);
+            if (teacher!=null) {
                 request.getSession().setAttribute("teacher",teacher);
                 response.sendRedirect("../../view/student/Info.jsp");
             } else {

@@ -13,64 +13,7 @@
     %>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#nav1").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#nav2").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#nav3").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#nav4").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-
-            $("#nav5").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#nav6").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#nav7").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#stu_homework").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#stu_post_homework").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#info").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#leave").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#getMsg").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#tinfo").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#file").click(function (e) {
-                e.preventDefault();
-                $("#f1").attr("src",$(this).attr("href"));
-            });
-            $("#getCourse").click(function (e) {
+            $("a[class='nav1']").click(function (e) {
                 e.preventDefault();
                 $("#f1").attr("src",$(this).attr("href"));
             });
@@ -78,9 +21,6 @@
         });
     </script>
 </head>
-<%
-
-%>
 <body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -88,15 +28,15 @@
         <!-- 头部区域（可配合layui 已有的水平导航） -->
         <ul class="layui-nav layui-layout-left" lay-filter="test">
             <c:if test="${role =='student'}">
-                <li class="layui-nav-item layui-hide-xs"><a id="nav1" href="/StuinfoServlet">个人信息</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav2" href="/ScoreServlet">历史成绩</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav3" href="stu_course.jsp">课表</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav4" href="stu_leave.jsp">请假申请</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav5" href="/StuHistoryHolidayServlet">请假记录</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav6" href="/GetMassageServlet">消息查看</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav7" href="/">查看作业</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav8" href="/">消息查看</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="nav9" href="stu_repairs.jsp">故障报修</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/StuinfoServlet">个人信息</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/ScoreServlet">历史成绩</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="stu_course.jsp">课表</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="stu_leave.jsp">请假申请</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/StuHistoryHolidayServlet">请假记录</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/GetMassageServlet">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/ViewHomeWorkServlet">查看作业</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="stu_repairs.jsp">故障报修</a></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">作业</a>
                     <dl class="layui-nav-child">
@@ -106,11 +46,14 @@
                 </li>
             </c:if>
             <c:if test="${role =='teacher'}">
-                <li class="layui-nav-item layui-hide-xs"><a id="tinfo" href="/TeacherInifServlet">个人信息</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="leave" href="/leave_for_approvalServlet">请假审核</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="getScore" href="">发起调课</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="getCourse" href="/QueryAllScoreServlet">查看全班学生学分</a></li>
-                <li class="layui-nav-item layui-hide-xs"><a id="getMsg" href="/GetMassageServlet">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/TeacherInifServlet">个人信息</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/leave_for_approvalServlet">请假审核</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="">发起调课</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/QueryAllScoreServlet">查看全班学生学分</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/GetMassageServlet">消息查看</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="../teacher/PostWork.jsp">发布作业</a></li>
+                <li class="layui-nav-item layui-hide-xs"><a class="nav1" href="/CheckWorkServlet">检查作业</a></li>
+
                 <li class="layui-nav-item">
                     <a href="javascript:;">作业</a>
                     <dl class="layui-nav-child">

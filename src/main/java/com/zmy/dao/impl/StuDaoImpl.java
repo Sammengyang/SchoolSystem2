@@ -2,6 +2,7 @@ package com.zmy.dao.impl;
 
 
 import com.zmy.dao.StuDao;
+import com.zmy.pojotrait.student.HomeWork;
 import com.zmy.pojotrait.student.Massage;
 import com.zmy.pojotrait.student.StuLeave;
 import com.zmy.pojo.student.Student;
@@ -9,10 +10,8 @@ import com.zmy.pojotrait.student.Stu_score;
 import com.zmy.util.DBUtil;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -402,5 +401,103 @@ public class StuDaoImpl implements StuDao {
             DBUtil.closeAll(con, ps);
         }
         return false;
+    }
+
+    /**
+     *
+     * @param cid   根据cid 查看自己的作业
+     * @return
+     */
+    @Override
+    public List<HomeWork> getStuHomeWork(Integer cid) {
+        List<HomeWork> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select t.tname,h.cid,h.text,h.endTime,h.postTime, h.jobContent,h.score from teacher t,homework h where t.tid=h.tid and cid=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,cid);
+            rs = ps.executeQuery();
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+            String postTime = "";
+            while (rs.next()){
+                Integer score = rs.getInt("score");
+                if (rs.getDate("postTime")==null){
+                    postTime="";
+                }else{
+                    postTime = sf.format(rs.getDate("postTime"));
+                }
+                HomeWork homeWork = new HomeWork(
+                        rs.getString("tname"),
+                        rs.getInt("cid"),
+                        rs.getString("text"),
+                        postTime,
+                        sf.format(rs.getDate("endTime")),
+                        rs.getString("jobContent"),
+                        score
+                );
+                list.add(homeWork);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return list;
+    }
+
+    /**
+     *
+     * @param homeWork 学生提交作业
+     */
+    @Override
+    public void submitWork(HomeWork homeWork) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "insert into homework (sid,jobContent,postTime) values(?,?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,homeWork.getSid());
+            ps.setObject(2,homeWork.getJobContent());
+            ps.setObject(3,homeWork.getPostTime());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+
+    }
+
+    /**
+     *  根据学号获取cid
+     * @param sid  学号
+     * @return
+     */
+    @Override
+    public Integer getCid(Integer sid) {
+        Integer cid=0;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select cid from student where sid=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,sid);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                cid = rs.getInt("cid");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return cid;
     }
 }
